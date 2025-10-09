@@ -2,6 +2,16 @@
 
 A modern, responsive Flutter application for managing and browsing products with support for multiple categories, bilingual interface (Arabic/English), and a clean, intuitive UI.
 
+## 🎥 Video Demo
+
+Watch the app in action:
+
+[![Watch Demo Video](https://img.shields.io/badge/▶️_Watch-Demo_Video-red?style=for-the-badge&logo=youtube)](https://drive.google.com/file/d/10PtvIftMX7XtI2J24A3efRA_EWx_D6cq/preview)
+
+**Click the button above to watch the video demo directly!**
+
+---
+
 ## 📥 Download APK
 
 **Ready to try the app?** Choose your preferred download:
