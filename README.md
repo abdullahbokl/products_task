@@ -6,9 +6,9 @@ A modern, responsive Flutter application for managing and browsing products with
 
 Watch the app in action:
 
-https://github.com/abdullahbokl/products_task/assets/demo/products_task.mp4
+[![Watch Demo Video](https://img.shields.io/badge/▶️_Watch-Demo_Video-red?style=for-the-badge&logo=youtube)](https://drive.google.com/file/d/10PtvIftMX7XtI2J24A3efRA_EWx_D6cq/preview)
 
-*The video shows the complete app functionality including product listing, category filtering, adding products, and responsive design.*
+**Click the button above to watch the video demo directly!**
 
 ---
 
