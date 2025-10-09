@@ -8,12 +8,14 @@ class CategoryContainer extends StatelessWidget {
   final Widget child;
   final String title;
   final bool isViewAll;
+  final bool isSelected;
 
   const CategoryContainer({
     super.key,
     required this.child,
     required this.title,
     this.isViewAll = false,
+    this.isSelected = false,
   });
 
   @override
@@ -31,7 +33,7 @@ class CategoryContainer extends StatelessWidget {
         color: AppColors.white,
         borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
         border: Border.all(
-          color: isViewAll ? AppColors.primaryGreen : AppColors.white,
+          color: (isViewAll || isSelected) ? AppColors.primaryGreen : AppColors.white,
           width: AppDimensions.categoryCardBorderWidth,
         ),
         boxShadow: [
@@ -57,7 +59,10 @@ class CategoryContainer extends StatelessWidget {
           const SizedBox(height: AppDimensions.spacingSmall),
           AppText(
             title,
-            style: AppTextStyles.categoryTitle,
+            style: AppTextStyles.categoryTitle.copyWith(
+              color: isSelected ? AppColors.primaryGreen : null,
+              fontWeight: isSelected ? FontWeight.bold : null,
+            ),
             textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

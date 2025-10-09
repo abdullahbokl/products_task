@@ -7,8 +7,6 @@ import '../../domain/entities/product.dart';
 import '../../domain/usecases/get_products.dart';
 import '../../domain/usecases/add_product.dart';
 import '../../domain/usecases/delete_product.dart';
-import '../widgets/categories/category_container.dart';
-import '../../../../core/utils/colors.dart';
 
 part 'product_state.dart';
 
@@ -128,6 +126,26 @@ class ProductCubit extends Cubit<ProductState> {
     ));
   }
 
+  /// Filter products by category
+  void filterByCategory(String? category) {
+    emit(state.copyWith(
+      selectedCategory: category,
+      clearCategory: category == null,
+    ));
+  }
+
+  /// Get filtered products based on selected category
+  List<Product> getFilteredProducts() {
+    final allProducts = state.getProductsStatus.data ?? [];
+    final selectedCategory = state.selectedCategory;
+
+    if (selectedCategory == null) {
+      return allProducts; // Show all products
+    }
+
+    return allProducts.where((product) => product.category == selectedCategory).toList();
+  }
+
   Future<void> removeProduct(String productId) async {
     try {
       await deleteProduct(productId);
@@ -138,28 +156,5 @@ class ProductCubit extends Cubit<ProductState> {
         getProductsStatus: BlocStatus.fail(error: e.toString(), data: existing),
       ));
     }
-  }
-}
-
-class ViewAllCategoriesButton extends StatelessWidget {
-  const ViewAllCategoriesButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return CategoryContainer(
-      title: AppStrings.viewAllCategories(context),
-      isViewAll: true,
-      child: Container(
-        color: AppColors.primaryGreen,
-        child: Center(
-          child: Image.asset(
-            'assets/icons/element4ctg_all.png',
-            width: 32,
-            height: 32,
-            color: AppColors.white,
-          ),
-        ),
-      ),
-    );
   }
 }

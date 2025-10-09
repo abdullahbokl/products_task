@@ -5,31 +5,38 @@ import 'category_container.dart';
 class CategoryCard extends StatelessWidget {
   final String title;
   final String imageUrl;
+  final VoidCallback? onTap;
+  final bool isSelected;
 
   const CategoryCard({
     super.key,
     required this.title,
     required this.imageUrl,
+    this.onTap,
+    this.isSelected = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return CategoryContainer(
-      title: title,
-      child: Image.network(
-        imageUrl,
-        fit: BoxFit.cover,
-        width: double.infinity,
-        errorBuilder: (context, error, stackTrace) {
-          return Container(
-            color: AppColors.lightGray,
-            child: const Center(
-              child: Icon(Icons.image, color: AppColors.mediumGray),
-            ),
-          );
-        },
+    return GestureDetector(
+      onTap: onTap,
+      child: CategoryContainer(
+        title: title,
+        isSelected: isSelected,
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+          width: double.infinity,
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              color: AppColors.lightGray,
+              child: const Center(
+                child: Icon(Icons.image, color: AppColors.mediumGray),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 }
-

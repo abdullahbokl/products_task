@@ -29,10 +29,13 @@ class _ProductListBodyState extends State<ProductListBody> {
       builder: (context, state) {
         return state.getProductsStatus.when(
           success: (products) {
-            final list = products ?? [];
-            if (list.isEmpty) return const EmptyProductsWidget();
+            // Get filtered products based on selected category
+            final filteredProducts = context.read<ProductCubit>().getFilteredProducts();
+
+            // Always show ProductListContent (which includes categories)
+            // Even if filteredProducts is empty, the content will handle the empty state
             return ProductListContent(
-              products: list,
+              products: filteredProducts,
               isHorizontal: _isHorizontal,
               onToggle: _toggleLayout,
             );
