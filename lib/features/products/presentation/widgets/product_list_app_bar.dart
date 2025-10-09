@@ -6,6 +6,7 @@ import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/custom_icon_button.dart';
 import '../cubit/product_cubit.dart';
+import '../pages/add_product_page.dart';
 
 class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ProductListAppBar({super.key});
@@ -31,7 +32,11 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           CustomIconButton.appBarAdd(
             onPressed: () {
-              context.read<ProductCubit>().addNewProduct();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const AddProductPage(),
+                ),
+              );
             },
           ),
         ],
