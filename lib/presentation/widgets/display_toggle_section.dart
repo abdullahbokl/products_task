@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_dimensions.dart';
 import '../../core/utils/text_styles.dart';
 import '../../core/utils/app_strings.dart';
 import '../../core/widgets/app_text.dart';
@@ -18,16 +19,19 @@ class DisplayToggleSection extends StatelessWidget {
     return GestureDetector(
       onTap: onToggle,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.paddingXLarge,
+          vertical: AppDimensions.paddingLarge,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Image.asset(
               'assets/icons/horizontal_vertical_icon.png',
-              width: 24,
-              height: 24,
+              width: AppDimensions.iconSizeSmall,
+              height: AppDimensions.iconSizeSmall,
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: AppDimensions.spacingSmall),
             AppText(
               isHorizontal
                   ? AppStrings.toggleToVertical(context)
@@ -40,4 +44,3 @@ class DisplayToggleSection extends StatelessWidget {
     );
   }
 }
-

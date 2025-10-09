@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_dimensions.dart';
 import '../../core/utils/colors.dart';
 import '../../core/utils/text_styles.dart';
 import '../../core/widgets/app_text.dart';
@@ -18,21 +19,26 @@ class CategoryContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      margin: const EdgeInsets.only(bottom: 4),
-      padding: const EdgeInsets.only(top: 7, left: 7, right: 7, bottom: 12),
+      width: AppDimensions.categoryCardWidth,
+      margin: const EdgeInsets.only(bottom: AppDimensions.spacingXSmall),
+      padding: const EdgeInsets.only(
+        top: AppDimensions.categoryCardInnerPaddingTop,
+        left: AppDimensions.categoryCardInnerPaddingHorizontal,
+        right: AppDimensions.categoryCardInnerPaddingHorizontal,
+        bottom: AppDimensions.categoryCardInnerPaddingBottom,
+      ),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
         border: Border.all(
           color: isViewAll ? AppColors.primaryGreen : AppColors.white,
-          width: 2,
+          width: AppDimensions.categoryCardBorderWidth,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
+            color: Colors.black.withValues(alpha: AppDimensions.shadowOpacity),
+            blurRadius: AppDimensions.shadowBlurRadius,
+            offset: const Offset(0, AppDimensions.shadowOffsetY),
           ),
         ],
       ),
@@ -41,12 +47,14 @@ class CategoryContainer extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+              ),
               clipBehavior: Clip.antiAlias,
               child: child,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppDimensions.spacingSmall),
           AppText(
             title,
             style: AppTextStyles.categoryTitle,

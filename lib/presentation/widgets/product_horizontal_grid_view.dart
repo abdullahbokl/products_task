@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_dimensions.dart';
 import '../../domain/entities/product.dart';
 import 'product_card_compact.dart';
 
@@ -11,11 +12,11 @@ class ProductHorizontalGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppDimensions.paddingXLarge),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
+        mainAxisSpacing: AppDimensions.spacingSmall,
+        crossAxisSpacing: AppDimensions.spacingSmall,
         childAspectRatio: 0.6,
       ),
       itemCount: products.length,

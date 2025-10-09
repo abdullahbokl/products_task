@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_dimensions.dart';
 import '../../domain/entities/product.dart';
 import 'product_details.dart';
 import 'product_image.dart';
@@ -12,17 +13,19 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0,
+      elevation: AppDimensions.cardElevation,
       margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+      ),
       child: Row(
-        spacing: 8,
+        spacing: AppDimensions.spacingSmall,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
             child: SizedBox(
-              width: 114,
-              height: 115,
+              width: AppDimensions.productCardImageWidth,
+              height: AppDimensions.productCardImageHeight,
               child: ProductImage(imageUrls: product.imageUrls),
             ),
           ),

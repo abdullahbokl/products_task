@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_dimensions.dart';
 import '../../core/utils/colors.dart';
 import '../../core/utils/text_styles.dart';
 import '../../core/utils/app_strings.dart';
@@ -12,7 +13,7 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppDimensions.paddingXLarge),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +25,7 @@ class ProductDetails extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.right,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppDimensions.spacingMedium),
           RichText(
             textAlign: TextAlign.right,
             text: TextSpan(
@@ -43,12 +44,15 @@ class ProductDetails extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppDimensions.spacingMedium),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.paddingLarge,
+              vertical: AppDimensions.paddingSmall,
+            ),
             decoration: BoxDecoration(
               color: AppColors.lightGray,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
             ),
             child: AppText(
               AppStrings.storeName(context),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_dimensions.dart';
 import '../../core/utils/colors.dart';
 import '../../core/utils/app_strings.dart';
 import 'category_container.dart';
@@ -16,8 +17,8 @@ class ViewAllCategoriesButton extends StatelessWidget {
         child: Center(
           child: Image.asset(
             'assets/icons/element4ctg_all.png',
-            width: 32,
-            height: 32,
+            width: AppDimensions.iconSizeMedium,
+            height: AppDimensions.iconSizeMedium,
             color: AppColors.white,
           ),
         ),

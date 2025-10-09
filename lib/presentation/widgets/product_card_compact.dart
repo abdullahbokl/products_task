@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_dimensions.dart';
 import '../../core/utils/colors.dart';
+import '../../core/utils/text_styles.dart';
 import '../../core/utils/app_strings.dart';
 import '../../core/widgets/app_text.dart';
 import 'product_image.dart';
@@ -13,31 +15,31 @@ class ProductCardCompact extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0,
+      elevation: AppDimensions.cardElevation,
       margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+      ),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
             child: SizedBox(
-              width: 100,
-              height: 100,
+              width: AppDimensions.productCardImageWidthCompact,
+              height: AppDimensions.productCardImageHeightCompact,
               child: ProductImage(imageUrls: product.imageUrls),
             ),
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(AppDimensions.paddingMedium),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppText(
                     AppStrings.productPlaceholderText(context),
-                    style: const TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 12,
+                    style: AppTextStyles.bodySmall.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.darkGray,
                     ),
@@ -45,35 +47,28 @@ class ProductCardCompact extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.right,
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: AppDimensions.spacingSmall),
                   AppText(
                     '${AppStrings.currencyDollar(context)} ${product.price.toStringAsFixed(0)}',
-                    style: const TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 12,
+                    style: AppTextStyles.bodySmall.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.primaryGreen,
                     ),
                     textAlign: TextAlign.right,
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: AppDimensions.spacingSmall),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
+                      horizontal: AppDimensions.paddingMedium,
+                      vertical: AppDimensions.paddingXSmall,
                     ),
                     decoration: BoxDecoration(
                       color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                     ),
                     child: AppText(
                       AppStrings.storeName(context),
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.mediumGray,
-                      ),
+                      style: AppTextStyles.caption,
                     ),
                   ),
                 ],
@@ -85,4 +80,3 @@ class ProductCardCompact extends StatelessWidget {
     );
   }
 }
-

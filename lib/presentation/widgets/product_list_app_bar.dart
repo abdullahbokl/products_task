@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/constants/app_dimensions.dart';
 import '../../core/utils/colors.dart';
 import '../../core/utils/app_strings.dart';
 import '../../core/widgets/app_text.dart';
+import '../../core/widgets/custom_icon_button.dart';
 import '../cubit/product_cubit.dart';
 
 class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -17,34 +19,20 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(width: 48),
+          const SizedBox(width: AppDimensions.iconSizeLarge),
           AppText(
             AppStrings.appBarProducts(context),
             style: const TextStyle(
               fontFamily: 'Montserrat',
-              fontSize: 24,
+              fontSize: AppDimensions.spacingXLarge,
               fontWeight: FontWeight.bold,
               color: Color(0xFF3E3E68),
             ),
           ),
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: AppColors.borderGray,
-                width: 1,
-              ),
-            ),
-            child: IconButton(
-              onPressed: () {
-                context.read<ProductCubit>().addNewProduct();
-              },
-              icon: const Icon(Icons.add, color: Colors.black, size: 24),
-              padding: EdgeInsets.zero,
-            ),
+          CustomIconButton.appBarAdd(
+            onPressed: () {
+              context.read<ProductCubit>().addNewProduct();
+            },
           ),
         ],
       ),
@@ -54,4 +42,3 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
-
