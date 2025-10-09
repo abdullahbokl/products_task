@@ -44,22 +44,6 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
-  void addNewProduct() {
-    final currentProducts = state.getProductsStatus.data ?? [];
-    final newProduct = Product(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      name: 'هذا النص هو مثال لنص',
-      storeName: 'اسم المتجر',
-      price: 120.0,
-      category: 'Architecture',
-      imageUrls: [AppStrings.sampleImageUrl],
-    );
-    final updatedProducts = [newProduct, ...currentProducts];
-    emit(state.copyWith(
-      getProductsStatus: BlocStatus.success(data: updatedProducts),
-    ));
-  }
-
   /// Add product from form with proper state management
   /// Returns true if successful, false if failed
   Future<bool> addProductFromForm({
@@ -116,13 +100,6 @@ class ProductCubit extends Cubit<ProductState> {
       ));
       return false;
     }
-  }
-
-  /// Reset add product status to initial state
-  void resetAddProductStatus() {
-    emit(state.copyWith(
-      addProductStatus: const BlocStatus.initial(),
-    ));
   }
 
   /// Filter products by category

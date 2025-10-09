@@ -15,7 +15,8 @@ Future<void> main() async {
   await _initApp();
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
+      enabled: false,
+      // enabled: !kReleaseMode,
       builder: (context) => const MyApp(),
       availableLocales: [
         const Locale('ar', 'SA'),
