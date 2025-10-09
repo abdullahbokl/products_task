@@ -1,59 +1,58 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/common/usecases/usecase.dart';
 import '../../../../core/helpers/bloc_status.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../../../../core/common/usecases/usecase.dart';
 import '../../domain/entities/product.dart';
-import '../../domain/usecases/get_products.dart';
-import '../../domain/usecases/add_product.dart';
-import '../../domain/usecases/delete_product.dart';
+import '../../domain/usecases/add_product_usecase.dart';
+import '../../domain/usecases/delete_product_usecase.dart';
+import '../../domain/usecases/get_products_usecase.dart';
 
 part 'product_state.dart';
 
 class ProductCubit extends Cubit<ProductState> {
-  final GetProducts getProducts;
-  final AddProduct addProduct;
-  final DeleteProduct deleteProduct;
+  final GetProductsUsecase getProductsUsecase;
+  final AddProductUsecase addProductUsecase;
+  final DeleteProductUsecase deleteProductUsecase;
 
   ProductCubit({
-    required this.getProducts,
-    required this.addProduct,
-    required this.deleteProduct,
+    required this.getProductsUsecase,
+    required this.addProductUsecase,
+    required this.deleteProductUsecase,
   }) : super(const ProductState());
 
   Future<void> loadProducts() async {
     final existing = state.getProductsStatus.data;
-    emit(state.copyWith(
-      getProductsStatus: BlocStatus.loading(data: existing),
-    ));
+    emit(state.copyWith(getProductsStatus: BlocStatus.loading(data: existing)));
 
-    final result = await getProducts(const NoParams());
+    final result = await getProductsUsecase(const NoParams());
 
     result.fold(
       (failure) {
-        emit(state.copyWith(
-          getProductsStatus: BlocStatus.fail(
-            error: failure.message,
-            data: existing,
+        emit(
+          state.copyWith(
+            getProductsStatus: BlocStatus.fail(
+              error: failure.message,
+              data: existing,
+            ),
           ),
-        ));
+        );
       },
       (products) {
         if (products.isEmpty) {
-          emit(state.copyWith(
-            getProductsStatus: const BlocStatus.empty(),
-          ));
+          emit(state.copyWith(getProductsStatus: const BlocStatus.empty()));
         } else {
-          emit(state.copyWith(
-            getProductsStatus: BlocStatus.success(data: products),
-          ));
+          emit(
+            state.copyWith(
+              getProductsStatus: BlocStatus.success(data: products),
+            ),
+          );
         }
       },
     );
   }
 
-  /// Add product from form with proper state management
-  /// Returns true if successful, false if failed
   Future<bool> addProductFromForm({
     required String name,
     required String storeName,
@@ -61,23 +60,91 @@ class ProductCubit extends Cubit<ProductState> {
     required String category,
     List<String>? imageUrls,
   }) async {
-    // Emit loading state
-    emit(state.copyWith(
-      addProductStatus: const BlocStatus.loading(),
-    ));
+    emit(state.copyWith(addProductStatus: const BlocStatus.loading()));
 
-    // Validate input
-    if (name.isEmpty || storeName.isEmpty || category.isEmpty || price <= 0) {
-      emit(state.copyWith(
-        addProductStatus: const BlocStatus.fail(
-          error: 'جميع الحقول مطلوبة والسعر يجب أن يكون أكبر من صفر',
-        ),
-      ));
+    final error = _validateFormInputs(
+      name: name,
+      storeName: storeName,
+      price: price,
+      category: category,
+    );
+
+    if (error != null) {
+      _emitFailureStatus(error);
       return false;
     }
 
-    // Create new product with multiple images
-    final newProduct = Product(
+    final product = _buildProduct(
+      name: name,
+      storeName: storeName,
+      price: price,
+      category: category,
+      imageUrls: imageUrls,
+    );
+
+    return await _addProduct(product);
+  }
+
+  String? _validateFormInputs({
+    required String name,
+    required String storeName,
+    required double price,
+    required String category,
+  }) {
+    return _validateInput(
+      name: name,
+      storeName: storeName,
+      price: price,
+      category: category,
+    );
+  }
+
+  void _emitFailureStatus(String error) {
+    emit(state.copyWith(addProductStatus: BlocStatus.fail(error: error)));
+  }
+
+  Product _buildProduct({
+    required String name,
+    required String storeName,
+    required double price,
+    required String category,
+    List<String>? imageUrls,
+  }) {
+    return _createNewProduct(
+      name: name,
+      storeName: storeName,
+      price: price,
+      category: category,
+      imageUrls: imageUrls,
+    );
+  }
+
+  Future<bool> _addProduct(Product product) async {
+    return await _performAddProduct(product);
+  }
+
+  // Validates input fields, returns error message or null if valid
+  String? _validateInput({
+    required String name,
+    required String storeName,
+    required double price,
+    required String category,
+  }) {
+    if (name.isEmpty || storeName.isEmpty || category.isEmpty || price <= 0) {
+      return 'جميع الحقول مطلوبة والسعر يجب أن يكون أكبر من صفر';
+    }
+    return null;
+  }
+
+  // Creates a Product instance from provided fields
+  Product _createNewProduct({
+    required String name,
+    required String storeName,
+    required double price,
+    required String category,
+    List<String>? imageUrls,
+  }) {
+    return Product(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: name,
       storeName: storeName,
@@ -87,37 +154,47 @@ class ProductCubit extends Cubit<ProductState> {
           ? imageUrls
           : [AppStrings.sampleImageUrl],
     );
+  }
 
-    // Add product through usecase
-    final result = await addProduct(AddProductParams(product: newProduct));
+  // Calls the addProduct usecase and emits appropriate states. Returns true on success.
+  Future<bool> _performAddProduct(Product newProduct) async {
+    final result = await addProductUsecase(
+      AddProductParams(product: newProduct),
+    );
 
-    return result.fold(
-      (failure) {
-        // Emit failure state
-        emit(state.copyWith(
-          addProductStatus: BlocStatus.fail(error: failure.message),
-        ));
+    final bool success = await result.fold(
+      (failure) async {
+        emit(
+          state.copyWith(
+            addProductStatus: BlocStatus.fail(error: failure.message),
+          ),
+        );
         return false;
       },
       (addedProduct) async {
-        // Reload products to get the updated list
+        // reload products to refresh the list
         await loadProducts();
 
-        // Emit success state
-        emit(state.copyWith(
-          addProductStatus: BlocStatus.success(data: addedProduct),
-        ));
+        emit(
+          state.copyWith(
+            addProductStatus: BlocStatus.success(data: addedProduct),
+          ),
+        );
         return true;
       },
     );
+
+    return success;
   }
 
   /// Filter products by category
   void filterByCategory(String? category) {
-    emit(state.copyWith(
-      selectedCategory: category,
-      clearCategory: category == null,
-    ));
+    emit(
+      state.copyWith(
+        selectedCategory: category,
+        clearCategory: category == null,
+      ),
+    );
   }
 
   /// Get filtered products based on selected category
@@ -129,25 +206,8 @@ class ProductCubit extends Cubit<ProductState> {
       return allProducts; // Show all products
     }
 
-    return allProducts.where((product) => product.category == selectedCategory).toList();
-  }
-
-  Future<void> removeProduct(String productId) async {
-    final result = await deleteProduct(DeleteProductParams(productId: productId));
-
-    result.fold(
-      (failure) {
-        final existing = state.getProductsStatus.data ?? [];
-        emit(state.copyWith(
-          getProductsStatus: BlocStatus.fail(
-            error: failure.message,
-            data: existing,
-          ),
-        ));
-      },
-      (_) async {
-        await loadProducts();
-      },
-    );
+    return allProducts
+        .where((product) => product.category == selectedCategory)
+        .toList();
   }
 }

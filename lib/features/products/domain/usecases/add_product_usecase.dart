@@ -1,14 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+
 import '../../../../core/common/usecases/usecase.dart';
 import '../../../../core/errors/failures.dart';
 import '../entities/product.dart';
 import '../repositories/product_repository.dart';
 
-class AddProduct implements Usecase<Product, AddProductParams> {
+class AddProductUsecase implements Usecase<Product, AddProductParams> {
   final ProductRepository repository;
 
-  AddProduct(this.repository);
+  AddProductUsecase(this.repository);
 
   @override
   Future<Either<Failure, Product>> call(AddProductParams params) async {

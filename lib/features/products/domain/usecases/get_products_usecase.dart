@@ -5,10 +5,10 @@ import '../../../../core/errors/failures.dart';
 import '../entities/product.dart';
 import '../repositories/product_repository.dart';
 
-class GetProducts implements Usecase<List<Product>, NoParams> {
+class GetProductsUsecase implements Usecase<List<Product>, NoParams> {
   final ProductRepository repository;
 
-  GetProducts(this.repository);
+  GetProductsUsecase(this.repository);
 
   @override
   Future<Either<Failure, List<Product>>> call(NoParams params) async {

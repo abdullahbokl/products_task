@@ -2,16 +2,15 @@ import 'dart:async';
 
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:products_task/core/services/navigation/navigation_service.dart';
 import 'package:products_task/core/services/service_locator/service_locator.config.dart'
     show $initGetIt;
-
-import 'package:products_task/core/services/navigation/navigation_service.dart';
 import 'package:products_task/features/products/data/datasources/local_product_datasource.dart';
 import 'package:products_task/features/products/data/repositories/product_repository_impl.dart';
 import 'package:products_task/features/products/domain/repositories/product_repository.dart';
-import 'package:products_task/features/products/domain/usecases/get_products.dart';
-import 'package:products_task/features/products/domain/usecases/add_product.dart';
-import 'package:products_task/features/products/domain/usecases/delete_product.dart';
+import 'package:products_task/features/products/domain/usecases/add_product_usecase.dart';
+import 'package:products_task/features/products/domain/usecases/delete_product_usecase.dart';
+import 'package:products_task/features/products/domain/usecases/get_products_usecase.dart';
 import 'package:products_task/features/products/presentation/cubit/product_cubit.dart';
 
 final GetIt getIt = GetIt.I;
@@ -43,21 +42,21 @@ Future<GetIt> configureDependencies() async {
     );
   }
 
-  if (!getIt.isRegistered<GetProducts>()) {
-    getIt.registerLazySingleton<GetProducts>(
-      () => GetProducts(getIt<ProductRepository>()),
+  if (!getIt.isRegistered<GetProductsUsecase>()) {
+    getIt.registerLazySingleton<GetProductsUsecase>(
+      () => GetProductsUsecase(getIt<ProductRepository>()),
     );
   }
 
-  if (!getIt.isRegistered<AddProduct>()) {
-    getIt.registerLazySingleton<AddProduct>(
-      () => AddProduct(getIt<ProductRepository>()),
+  if (!getIt.isRegistered<AddProductUsecase>()) {
+    getIt.registerLazySingleton<AddProductUsecase>(
+      () => AddProductUsecase(getIt<ProductRepository>()),
     );
   }
 
-  if (!getIt.isRegistered<DeleteProduct>()) {
-    getIt.registerLazySingleton<DeleteProduct>(
-      () => DeleteProduct(getIt<ProductRepository>()),
+  if (!getIt.isRegistered<DeleteProductUsecase>()) {
+    getIt.registerLazySingleton<DeleteProductUsecase>(
+      () => DeleteProductUsecase(getIt<ProductRepository>()),
     );
   }
 
@@ -65,9 +64,9 @@ Future<GetIt> configureDependencies() async {
   if (!getIt.isRegistered<ProductCubit>()) {
     getIt.registerFactory<ProductCubit>(
       () => ProductCubit(
-        getProducts: getIt<GetProducts>(),
-        addProduct: getIt<AddProduct>(),
-        deleteProduct: getIt<DeleteProduct>(),
+        getProductsUsecase: getIt<GetProductsUsecase>(),
+        addProductUsecase: getIt<AddProductUsecase>(),
+        deleteProductUsecase: getIt<DeleteProductUsecase>(),
       ),
     );
   }

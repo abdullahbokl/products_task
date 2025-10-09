@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../../../core/common/widgets/app_snackbar.dart';
+import '../../../../../core/services/navigation/navigation_service.dart';
+import '../../../../../core/services/service_locator/service_locator.dart';
 import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/form_validators.dart';
-import '../../../../../core/common/widgets/app_snackbar.dart';
-import '../../../../../core/services/service_locator/service_locator.dart';
-import '../../../../../core/services/navigation/navigation_service.dart';
 import '../../cubit/product_cubit.dart';
 import 'add_product_form_model.dart';
-import 'custom_text_form_field.dart';
 import 'category_dropdown_field.dart';
+import 'custom_text_form_field.dart';
 import 'multi_image_picker_section.dart';
 import 'submit_button.dart';
 
@@ -76,35 +77,26 @@ class _AddProductFormState extends State<AddProductForm> {
   }
 
   Future<void> _submitForm() async {
-    // Validate form
     if (!_formModel.validate()) return;
 
-    // Call Cubit with model's data (Cubit handles all logic)
     final success = await context.read<ProductCubit>().addProductFromForm(
-          name: _formModel.name,
-          storeName: _formModel.storeName,
-          price: _formModel.price,
-          category: _formModel.category,
-          imageUrls: _formModel.imagePaths.isNotEmpty
-              ? _formModel.imagePaths
-              : null,
-        );
+      name: _formModel.name,
+      storeName: _formModel.storeName,
+      price: _formModel.price,
+      category: _formModel.category,
+      imageUrls: _formModel.imagePaths.isNotEmpty
+          ? _formModel.imagePaths
+          : null,
+    );
 
-    // Handle UI based on result
     if (!mounted) return;
 
     if (success) {
       getIt<NavigationService>().pop();
-      AppSnackBar.showSuccess(
-        context,
-        AppStrings.productAddedSuccess(context),
-      );
+      AppSnackBar.showSuccess(context, AppStrings.productAddedSuccess(context));
     } else {
       final error = context.read<ProductCubit>().state.addProductStatus.error;
-      AppSnackBar.showError(
-        context,
-        error ?? 'حدث خطأ أثناء إضافة المنتج',
-      );
+      AppSnackBar.showError(context, error ?? 'حدث خطأ أثناء إضافة المنتج');
     }
   }
 
