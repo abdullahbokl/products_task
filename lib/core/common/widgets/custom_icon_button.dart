@@ -31,7 +31,7 @@ class CustomIconButton extends StatelessWidget {
   }) {
     return CustomIconButton(
       onPressed: onPressed,
-      icon: const Icon(
+      icon: Icon(
         Icons.add,
         color: Colors.black,
         size: AppDimensions.iconSizeSmall,

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/colors.dart';
+import '../../../../../core/utils/responsive.dart';
 import '../../../../../core/common/widgets/app_loader.dart';
 
 class ProductImage extends StatelessWidget {
@@ -14,11 +15,11 @@ class ProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (imageUrls.isEmpty) {
-      return const Center(
+      return Center(
         child: Icon(
           Icons.image,
           color: AppColors.mediumGray,
-          size: 48,
+          size: Responsive.scaleSize(48),
         ),
       );
     }
@@ -43,11 +44,11 @@ class ProductImage extends StatelessWidget {
               );
             },
             errorBuilder: (context, error, stackTrace) {
-              return const Center(
+              return Center(
                 child: Icon(
                   Icons.image_not_supported,
                   color: AppColors.mediumGray,
-                  size: 48,
+                  size: Responsive.scaleSize(48),
                 ),
               );
             },
@@ -58,11 +59,11 @@ class ProductImage extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             errorBuilder: (context, error, stackTrace) {
-              return const Center(
+              return Center(
                 child: Icon(
                   Icons.image_not_supported,
                   color: AppColors.mediumGray,
-                  size: 48,
+                  size: Responsive.scaleSize(48),
                 ),
               );
             },

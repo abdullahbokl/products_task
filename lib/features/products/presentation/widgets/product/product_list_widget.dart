@@ -24,7 +24,7 @@ class ProductListWidget extends StatelessWidget {
     if (products.isEmpty) {
       return Center(
         child: Padding(
-          padding: const EdgeInsets.all(AppDimensions.paddingXLarge),
+          padding: EdgeInsets.all(AppDimensions.paddingXLarge),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -33,7 +33,7 @@ class ProductListWidget extends StatelessWidget {
                 size: AppDimensions.iconSizeLarge,
                 color: AppColors.mediumGray,
               ),
-              const SizedBox(height: AppDimensions.spacingLarge),
+              SizedBox(height: AppDimensions.spacingLarge),
               AppText(
                 AppStrings.noCategoryProducts(context),
                 style: AppTextStyles.heading3.copyWith(
@@ -41,7 +41,7 @@ class ProductListWidget extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: AppDimensions.spacingSmall),
+              SizedBox(height: AppDimensions.spacingSmall),
               AppText(
                 AppStrings.noCategoryProductsHint(context),
                 style: AppTextStyles.bodyMedium.copyWith(
@@ -59,11 +59,11 @@ class ProductListWidget extends StatelessWidget {
       return ProductHorizontalGridView(products: products);
     } else {
       return ListView.builder(
-        padding: const EdgeInsets.all(AppDimensions.paddingXLarge),
+        padding: EdgeInsets.all(AppDimensions.paddingXLarge),
         itemCount: products.length,
         itemBuilder: (context, index) {
           return Container(
-            margin: const EdgeInsets.only(bottom: AppDimensions.paddingXLarge),
+            margin: EdgeInsets.only(bottom: AppDimensions.paddingXLarge),
             child: ProductCard(product: products[index]),
           );
         },

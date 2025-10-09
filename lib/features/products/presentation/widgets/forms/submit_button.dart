@@ -24,7 +24,7 @@ class SubmitButton extends StatelessWidget {
         backgroundColor: AppColors.primaryGreen,
         foregroundColor: AppColors.white,
         disabledBackgroundColor: AppColors.mediumGray,
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           vertical: AppDimensions.paddingLarge,
         ),
         shape: RoundedRectangleBorder(

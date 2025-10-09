@@ -32,7 +32,7 @@ class ProductCardCompact extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+              padding: EdgeInsets.all(AppDimensions.paddingMedium),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +47,7 @@ class ProductCardCompact extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.right,
                   ),
-                  const SizedBox(height: AppDimensions.spacingSmall),
+                  SizedBox(height: AppDimensions.spacingSmall),
                   AppText(
                     '${AppStrings.currencyDollar(context)} ${product.price.toStringAsFixed(0)}',
                     style: AppTextStyles.bodySmall.copyWith(
@@ -56,9 +56,9 @@ class ProductCardCompact extends StatelessWidget {
                     ),
                     textAlign: TextAlign.right,
                   ),
-                  const SizedBox(height: AppDimensions.spacingSmall),
+                  SizedBox(height: AppDimensions.spacingSmall),
                   Container(
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: AppDimensions.paddingMedium,
                       vertical: AppDimensions.paddingXSmall,
                     ),

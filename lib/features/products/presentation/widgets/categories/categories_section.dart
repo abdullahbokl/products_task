@@ -22,7 +22,7 @@ class CategoriesSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                 horizontal: AppDimensions.paddingXLarge,
                 vertical: AppDimensions.paddingMedium,
               ),
@@ -35,7 +35,7 @@ class CategoriesSection extends StatelessWidget {
               height: AppDimensions.categoryCardHeight,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: AppDimensions.paddingXLarge,
                 ),
                 children: [
@@ -46,12 +46,12 @@ class CategoriesSection extends StatelessWidget {
                       context.read<ProductCubit>().filterByCategory(null);
                     },
                   ),
-                  const SizedBox(width: AppDimensions.spacingMedium),
+                  SizedBox(width: AppDimensions.spacingMedium),
 
                   // Generate category cards from enum
                   ...ProductCategory.values.map((category) {
                     return Padding(
-                      padding: const EdgeInsets.only(
+                      padding: EdgeInsets.only(
                           right: AppDimensions.spacingMedium),
                       child: CategoryCard(
                         title: category.getDisplayName(),

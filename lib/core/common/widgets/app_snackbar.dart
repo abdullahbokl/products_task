@@ -81,7 +81,7 @@ class AppSnackBar {
                 color: AppColors.white,
                 size: AppDimensions.iconSizeSmall,
               ),
-              const SizedBox(width: AppDimensions.spacingMedium),
+              SizedBox(width: AppDimensions.spacingMedium),
             ],
             Expanded(
               child: AppText(
@@ -99,7 +99,7 @@ class AppSnackBar {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
         ),
-        margin: const EdgeInsets.all(AppDimensions.paddingXLarge),
+        margin: EdgeInsets.all(AppDimensions.paddingXLarge),
       ),
     );
   }

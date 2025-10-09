@@ -12,8 +12,8 @@ class ProductHorizontalGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.all(AppDimensions.paddingXLarge),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      padding: EdgeInsets.all(AppDimensions.paddingXLarge),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: AppDimensions.spacingSmall,
         crossAxisSpacing: AppDimensions.spacingSmall,

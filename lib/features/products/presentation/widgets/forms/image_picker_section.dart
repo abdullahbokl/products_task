@@ -3,6 +3,7 @@ import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/utils/responsive.dart';
 import '../../../../../core/common/widgets/app_text.dart';
 import '../../../../../core/common/widgets/app_loader.dart';
 
@@ -58,10 +59,10 @@ class ImagePickerSection extends StatelessWidget {
       children: [
         Icon(
           Icons.add_photo_alternate_outlined,
-          size: 64,
+          size: Responsive.scaleSize(64),
           color: AppColors.mediumGray,
         ),
-        const SizedBox(height: AppDimensions.spacingMedium),
+        SizedBox(height: AppDimensions.spacingMedium),
         AppText(
           AppStrings.addProductImage(context),
           style: AppTextStyles.bodyMedium.copyWith(

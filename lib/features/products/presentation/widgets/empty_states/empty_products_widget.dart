@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/utils/app_dimensions.dart';
+import '../../../../../core/utils/responsive.dart';
 import '../../../../../core/common/widgets/app_text.dart';
 import 'empty_state_message.dart';
 
@@ -11,7 +13,7 @@ class EmptyProductsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(AppDimensions.spacingXLarge),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -20,7 +22,7 @@ class EmptyProductsWidget extends StatelessWidget {
               title: AppStrings.emptyProductsTitle(context),
               subtitle: AppStrings.emptyProductsSubtitle(context),
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: Responsive.scaleSpacing(32)),
             ElevatedButton.icon(
               onPressed: () {},
               icon: const Icon(Icons.add),
@@ -28,7 +30,10 @@ class EmptyProductsWidget extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primaryGreen,
                 foregroundColor: AppColors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: EdgeInsets.symmetric(
+                  horizontal: Responsive.scaleSpacing(24),
+                  vertical: Responsive.scaleSpacing(12),
+                ),
               ),
             ),
           ],
@@ -37,4 +42,3 @@ class EmptyProductsWidget extends StatelessWidget {
     );
   }
 }
-

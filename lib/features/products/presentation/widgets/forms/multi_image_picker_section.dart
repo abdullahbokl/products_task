@@ -33,7 +33,7 @@ class MultiImagePickerSection extends StatelessWidget {
             color: AppColors.darkGray,
           ),
         ),
-        const SizedBox(height: AppDimensions.spacingSmall),
+        SizedBox(height: AppDimensions.spacingSmall),
 
         // Vertical list of images
         if (imagePaths.isNotEmpty || isLoading) ...[
@@ -42,7 +42,7 @@ class MultiImagePickerSection extends StatelessWidget {
             height: AppDimensions.imagePickerGridHeight,
             child: GridView.builder(
               scrollDirection: Axis.horizontal,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 mainAxisSpacing: AppDimensions.spacingMedium,
                 childAspectRatio: 1,
@@ -57,7 +57,7 @@ class MultiImagePickerSection extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(height: AppDimensions.spacingMedium),
+          SizedBox(height: AppDimensions.spacingMedium),
         ],
 
         // Add button always at the bottom
@@ -128,7 +128,7 @@ class MultiImagePickerSection extends StatelessWidget {
                   color: AppColors.accentRed.withValues(alpha: 0.8),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.close,
                   color: AppColors.white,
                   size: AppDimensions.spacingLarge,
@@ -150,7 +150,7 @@ class MultiImagePickerSection extends StatelessWidget {
           color: AppColors.primaryGreen,
           borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
         ),
-        child: const Center(
+        child: Center(
           child: Icon(
             Icons.add,
             size: AppDimensions.iconSizeMedium,

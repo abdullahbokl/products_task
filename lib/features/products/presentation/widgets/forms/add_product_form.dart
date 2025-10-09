@@ -115,7 +115,7 @@ class _AddProductFormState extends State<AddProductForm> {
           previous.addProductStatus != current.addProductStatus,
       builder: (context, state) {
         return SingleChildScrollView(
-          padding: const EdgeInsets.all(AppDimensions.paddingXLarge),
+          padding: EdgeInsets.all(AppDimensions.paddingXLarge),
           child: Form(
             key: _formModel.formKey,
             child: Column(
@@ -127,7 +127,7 @@ class _AddProductFormState extends State<AddProductForm> {
                   onRemoveImage: _removeImage,
                   isLoading: _isPickingImage,
                 ),
-                const SizedBox(height: AppDimensions.spacingXLarge),
+                SizedBox(height: AppDimensions.spacingXLarge),
                 CustomTextFormField(
                   controller: _formModel.nameController,
                   label: AppStrings.productNameLabel(context),
@@ -137,7 +137,7 @@ class _AddProductFormState extends State<AddProductForm> {
                     message: AppStrings.fieldRequired(context),
                   ),
                 ),
-                const SizedBox(height: AppDimensions.spacingLarge),
+                SizedBox(height: AppDimensions.spacingLarge),
                 CustomTextFormField(
                   controller: _formModel.storeNameController,
                   label: AppStrings.storeNameLabel(context),
@@ -147,7 +147,7 @@ class _AddProductFormState extends State<AddProductForm> {
                     message: AppStrings.fieldRequired(context),
                   ),
                 ),
-                const SizedBox(height: AppDimensions.spacingLarge),
+                SizedBox(height: AppDimensions.spacingLarge),
                 CustomTextFormField(
                   controller: _formModel.priceController,
                   label: AppStrings.priceLabel(context),
@@ -166,7 +166,7 @@ class _AddProductFormState extends State<AddProductForm> {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppDimensions.spacingLarge),
+                SizedBox(height: AppDimensions.spacingLarge),
                 CategoryDropdownField(
                   label: AppStrings.categoryLabel(context),
                   hint: AppStrings.categoryHint(context),
@@ -183,7 +183,7 @@ class _AddProductFormState extends State<AddProductForm> {
                     return null;
                   },
                 ),
-                const SizedBox(height: AppDimensions.spacingXLarge),
+                SizedBox(height: AppDimensions.spacingXLarge),
                 SubmitButton(
                   onPressed: _submitForm,
                   text: AppStrings.addProductButton(context),

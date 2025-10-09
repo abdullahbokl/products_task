@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../utils/colors.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/app_strings.dart';
+import '../../utils/app_dimensions.dart';
+import '../../utils/responsive.dart';
 import 'app_text.dart';
 
 class AppErrorWidget extends StatelessWidget {
@@ -18,28 +20,28 @@ class AppErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(AppDimensions.spacingXLarge),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.error_outline,
-              size: 64,
+              size: Responsive.scaleSize(64),
               color: AppColors.accentRed,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: AppDimensions.spacingLarge),
             AppText(
               AppStrings.errorTitle(context),
               style: AppTextStyles.heading2,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: AppDimensions.spacingSmall),
             AppText(
               message,
               textAlign: TextAlign.center,
               style: AppTextStyles.bodyMedium,
             ),
             if (onRetry != null) ...[
-              const SizedBox(height: 24),
+              SizedBox(height: AppDimensions.spacingXLarge),
               ElevatedButton(
                 onPressed: onRetry,
                 child: AppText(AppStrings.tryAgainButton(context)),
@@ -51,4 +53,3 @@ class AppErrorWidget extends StatelessWidget {
     );
   }
 }
-

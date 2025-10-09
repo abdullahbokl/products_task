@@ -3,6 +3,7 @@ import '../../../../core/utils/app_dimensions.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/text_styles.dart';
+import '../../../../core/utils/responsive.dart';
 import '../../../../core/common/widgets/app_text.dart';
 import '../../../../core/common/widgets/custom_icon_button.dart';
 import '../../../../core/services/service_locator/service_locator.dart';
@@ -14,6 +15,9 @@ class AddProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize responsive system
+    Responsive.init(context);
+
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -23,7 +27,7 @@ class AddProductScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: CustomIconButton(
             onPressed: () => getIt<NavigationService>().pop(),
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios_new_rounded,
               color: Colors.black,
               size: AppDimensions.iconSizeSmall,

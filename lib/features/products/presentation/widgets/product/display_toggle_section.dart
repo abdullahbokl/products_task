@@ -20,7 +20,7 @@ class DisplayToggleSection extends StatelessWidget {
     return GestureDetector(
       onTap: onToggle,
       child: Container(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           horizontal: AppDimensions.paddingXLarge,
           vertical: AppDimensions.paddingLarge,
         ),
@@ -32,14 +32,12 @@ class DisplayToggleSection extends StatelessWidget {
               width: AppDimensions.iconSizeSmall,
               height: AppDimensions.iconSizeSmall,
             ),
-            const SizedBox(width: AppDimensions.spacingSmall),
+            SizedBox(width: AppDimensions.spacingSmall),
             AppText(
               isHorizontal
                   ? AppStrings.toggleToVertical(context)
                   : AppStrings.toggleToHorizontal(context),
-              style: AppTextStyles.accent.copyWith(
-                fontSize: 12,
-              ),
+              style: AppTextStyles.accent,
             ),
           ],
         ),

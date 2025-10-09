@@ -4,6 +4,7 @@ import 'core/services/service_locator/service_locator.dart'
     show configureDependencies, getIt;
 import 'core/services/navigation/navigation_service.dart';
 import 'core/utils/themes.dart';
+import 'core/utils/responsive.dart';
 import 'core/localization/app_localization_delegate.dart';
 import 'features/products/presentation/pages/product_list_screen.dart';
 
@@ -24,7 +25,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Products Task',
-      theme: AppThemes.lightTheme,
+      theme: AppThemes.staticLightTheme,
+      builder: (context, child) {
+        // Initialize responsive system here with context
+        Responsive.init(context);
+        return child ?? const SizedBox.shrink();
+      },
       home: const ProductListScreen(),
       debugShowCheckedModeBanner: false,
       navigatorKey: getIt<NavigationService>().navigatorKey,

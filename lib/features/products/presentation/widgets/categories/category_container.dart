@@ -22,8 +22,8 @@ class CategoryContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: AppDimensions.categoryCardWidth,
-      margin: const EdgeInsets.only(bottom: AppDimensions.spacingXSmall),
-      padding: const EdgeInsets.only(
+      margin: EdgeInsets.only(bottom: AppDimensions.spacingXSmall),
+      padding: EdgeInsets.only(
         top: AppDimensions.categoryCardInnerPaddingTop,
         left: AppDimensions.categoryCardInnerPaddingHorizontal,
         right: AppDimensions.categoryCardInnerPaddingHorizontal,
@@ -40,7 +40,7 @@ class CategoryContainer extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withValues(alpha: AppDimensions.shadowOpacity),
             blurRadius: AppDimensions.shadowBlurRadius,
-            offset: const Offset(0, AppDimensions.shadowOffsetY),
+            offset: Offset(0, AppDimensions.shadowOffsetY),
           ),
         ],
       ),
@@ -56,7 +56,7 @@ class CategoryContainer extends StatelessWidget {
               child: child,
             ),
           ),
-          const SizedBox(height: AppDimensions.spacingSmall),
+          SizedBox(height: AppDimensions.spacingSmall),
           AppText(
             title,
             style: AppTextStyles.categoryTitle.copyWith(

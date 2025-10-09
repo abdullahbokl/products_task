@@ -83,7 +83,7 @@ class CategoryDropdownField extends StatelessWidget {
                 width: 2,
               ),
             ),
-            contentPadding: const EdgeInsets.symmetric(
+            contentPadding: EdgeInsets.symmetric(
               horizontal: AppDimensions.paddingXLarge,
               vertical: AppDimensions.paddingLarge,
             ),

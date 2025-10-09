@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../utils/colors.dart';
+import '../../utils/responsive.dart';
 
 class AppTextField extends StatelessWidget {
   final String hintText;
@@ -45,26 +46,29 @@ class AppTextField extends StatelessWidget {
         filled: true,
         fillColor: AppColors.white,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(Responsive.scaleRadius(8)),
           borderSide: BorderSide(color: AppColors.borderGray),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(Responsive.scaleRadius(8)),
           borderSide: BorderSide(color: AppColors.borderGray),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(Responsive.scaleRadius(8)),
           borderSide: BorderSide(color: AppColors.primaryGreen, width: 2),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(Responsive.scaleRadius(8)),
           borderSide: BorderSide(color: AppColors.accentRed),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(Responsive.scaleRadius(8)),
           borderSide: BorderSide(color: AppColors.accentRed, width: 2),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: Responsive.scaleSpacing(16),
+          vertical: Responsive.scaleSpacing(12),
+        ),
       ),
     );
   }

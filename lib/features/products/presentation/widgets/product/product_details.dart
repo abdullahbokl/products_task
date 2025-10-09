@@ -20,7 +20,7 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppDimensions.paddingXLarge),
+      padding: EdgeInsets.all(AppDimensions.paddingXLarge),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +32,7 @@ class ProductDetails extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.right,
           ),
-          const SizedBox(height: AppDimensions.spacingMedium),
+          SizedBox(height: AppDimensions.spacingMedium),
           RichText(
             textAlign: TextAlign.right,
             text: TextSpan(
@@ -51,9 +51,9 @@ class ProductDetails extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: AppDimensions.spacingMedium),
+          SizedBox(height: AppDimensions.spacingMedium),
           Container(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: AppDimensions.paddingLarge,
               vertical: AppDimensions.paddingSmall,
             ),

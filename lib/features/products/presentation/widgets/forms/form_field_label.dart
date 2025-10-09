@@ -17,7 +17,7 @@ class FormFieldLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppDimensions.spacingSmall),
+      padding: EdgeInsets.only(bottom: AppDimensions.spacingSmall),
       child: Row(
         children: [
           AppText(
@@ -28,7 +28,7 @@ class FormFieldLabel extends StatelessWidget {
             ),
           ),
           if (isRequired) ...[
-            const SizedBox(width: AppDimensions.spacingXSmall),
+            SizedBox(width: AppDimensions.spacingXSmall),
             AppText(
               '*',
               style: AppTextStyles.bodyMedium.copyWith(

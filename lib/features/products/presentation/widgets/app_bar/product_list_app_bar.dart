@@ -23,7 +23,7 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(width: AppDimensions.iconSizeLarge),
+          SizedBox(width: AppDimensions.iconSizeLarge),
           AppText(
             AppStrings.appBarProducts(context),
             style: AppTextStyles.heading2.copyWith(
