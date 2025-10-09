@@ -13,7 +13,10 @@ class AppColors {
   static const Color darkGray = Color(0xFF333333);
   static const Color mediumGray = Color(0xFF9E9E9E);
   static const Color lightText = Color(0xFF666666);
-  
+
+  // Title / heading color used across the app
+  static const Color titleColor = Color(0xFF3E3E68);
+
   // Accent colors
   static const Color accentRed = Color(0xFFF44336);
   static const Color successGreen = Color(0xFF4CAF50);

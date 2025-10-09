@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../utils/colors.dart';
-import '../../utils/text_styles.dart';
-import '../../utils/app_strings.dart';
+
 import '../../utils/app_dimensions.dart';
+import '../../utils/app_strings.dart';
+import '../../utils/colors.dart';
 import '../../utils/responsive.dart';
+import '../../utils/text_styles.dart';
 import 'app_text.dart';
 
 class AppErrorWidget extends StatelessWidget {
   final String message;
   final VoidCallback? onRetry;
-
   const AppErrorWidget({
     super.key,
     required this.message,

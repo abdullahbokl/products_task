@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/utils/app_dimensions.dart';
-import '../../../../../core/utils/colors.dart';
-import '../../../../../core/utils/app_strings.dart';
+
 import '../../../../../core/common/widgets/app_text.dart';
 import '../../../../../core/common/widgets/custom_icon_button.dart';
-import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/services/service_locator/service_locator.dart';
 import '../../../../../core/services/navigation/navigation_service.dart';
+import '../../../../../core/services/service_locator/service_locator.dart';
+import '../../../../../core/utils/app_dimensions.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/utils/colors.dart';
+import '../../../../../core/utils/text_styles.dart';
 import '../../cubit/product_cubit.dart';
 import '../../pages/add_product_screen.dart';
 
@@ -27,10 +28,10 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
           AppText(
             AppStrings.appBarProducts(context),
             style: AppTextStyles.heading2.copyWith(
-              color: const Color(0xFF3E3E68),
+              color: AppColors.titleColor,
             ),
           ),
-          CustomIconButton.appBarAdd(
+          CustomIconButton(
             onPressed: () {
               getIt<NavigationService>().pushPage(
                 BlocProvider.value(
@@ -39,6 +40,17 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               );
             },
+            icon: Icon(
+              Icons.add,
+              color: Colors.black,
+              size: AppDimensions.iconSizeSmall,
+            ),
+            size: AppDimensions.iconSizeLarge,
+            backgroundColor: AppColors.white,
+            borderColor: AppColors.borderGray,
+            borderWidth: AppDimensions.cardBorderWidth,
+            borderRadius: AppDimensions.radiusLarge,
+            padding: EdgeInsets.zero,
           ),
         ],
       ),

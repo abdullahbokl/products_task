@@ -4,16 +4,12 @@ import 'package:flutter/material.dart';
 class Responsive {
   static late double _screenWidth;
   static late double _screenHeight;
-  static late double _blockSizeHorizontal;
-  static late double _blockSizeVertical;
 
   /// Initialize responsive system with context
   static void init(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
     _screenWidth = mediaQuery.size.width;
     _screenHeight = mediaQuery.size.height;
-    _blockSizeHorizontal = _screenWidth / 100;
-    _blockSizeVertical = _screenHeight / 100;
   }
 
   /// Get screen width
@@ -93,30 +89,4 @@ class Responsive {
 
     return responsiveSpacing.clamp(lowerLimit, upperLimit);
   }
-
-  /// Get percentage of screen width
-  static double widthPercent(double percent) {
-    return _blockSizeHorizontal * percent;
-  }
-
-  /// Get percentage of screen height
-  static double heightPercent(double percent) {
-    return _blockSizeVertical * percent;
-  }
-
-  /// Check if device is tablet (width > 600)
-  static bool isTablet() {
-    return _screenWidth > 600;
-  }
-
-  /// Check if device is small phone (width < 360)
-  static bool isSmallPhone() {
-    return _screenWidth < 360;
-  }
-
-  /// Check if device is large phone (width > 414)
-  static bool isLargePhone() {
-    return _screenWidth > 414;
-  }
 }
-

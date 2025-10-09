@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/common/widgets/app_loader.dart';
-import '../../../../../core/utils/app_strings.dart';
+
 import '../../../../../core/common/widgets/error_widget.dart';
+import '../../../../../core/utils/app_strings.dart';
 import '../../cubit/product_cubit.dart';
 import '../empty_states/empty_products_widget.dart';
 import 'product_list_content.dart';
@@ -29,11 +29,10 @@ class _ProductListBodyState extends State<ProductListBody> {
       builder: (context, state) {
         return state.getProductsStatus.when(
           success: (products) {
-            // Get filtered products based on selected category
-            final filteredProducts = context.read<ProductCubit>().getFilteredProducts();
+            final filteredProducts = context
+                .read<ProductCubit>()
+                .getFilteredProducts();
 
-            // Always show ProductListContent (which includes categories)
-            // Even if filteredProducts is empty, the content will handle the empty state
             return ProductListContent(
               products: filteredProducts,
               isHorizontal: _isHorizontal,
@@ -44,7 +43,6 @@ class _ProductListBodyState extends State<ProductListBody> {
             message: error ?? AppStrings.errorFallback(context),
             onRetry: () => context.read<ProductCubit>().loadProducts(),
           ),
-          loading: () => const AppLoader(),
           empty: () => const EmptyProductsWidget(),
         );
       },

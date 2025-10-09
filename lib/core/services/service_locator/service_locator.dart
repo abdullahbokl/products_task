@@ -27,9 +27,7 @@ Future<GetIt> configureDependencies() async {
 
   // Register NavigationService as a singleton
   if (!getIt.isRegistered<NavigationService>()) {
-    getIt.registerLazySingleton<NavigationService>(
-      () => NavigationService(),
-    );
+    getIt.registerLazySingleton<NavigationService>(() => NavigationService());
   }
 
   // Manual registrations (guarded to avoid duplicate registration when codegen is used)
@@ -76,6 +74,3 @@ Future<GetIt> configureDependencies() async {
 
   return getIt;
 }
-
-@module
-abstract class AppModule {}

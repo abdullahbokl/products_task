@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../utils/app_dimensions.dart';
 import '../../utils/colors.dart';
 
-/// Reusable custom icon button with consistent styling
 class CustomIconButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget icon;
@@ -24,26 +24,6 @@ class CustomIconButton extends StatelessWidget {
     this.borderRadius,
     this.padding,
   });
-
-  /// Factory for app bar add button style
-  factory CustomIconButton.appBarAdd({
-    required VoidCallback? onPressed,
-  }) {
-    return CustomIconButton(
-      onPressed: onPressed,
-      icon: Icon(
-        Icons.add,
-        color: Colors.black,
-        size: AppDimensions.iconSizeSmall,
-      ),
-      size: AppDimensions.iconSizeLarge,
-      backgroundColor: AppColors.white,
-      borderColor: AppColors.borderGray,
-      borderWidth: AppDimensions.cardBorderWidth,
-      borderRadius: AppDimensions.radiusLarge,
-      padding: EdgeInsets.zero,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,4 +50,3 @@ class CustomIconButton extends StatelessWidget {
     );
   }
 }
-
