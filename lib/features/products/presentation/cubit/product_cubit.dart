@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../../../core/helpers/bloc_status.dart';
 import '../../../../core/utils/app_strings.dart';
+import '../../../../core/common/usecases/usecase.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/usecases/get_products.dart';
 import '../../domain/usecases/add_product.dart';
@@ -26,22 +27,29 @@ class ProductCubit extends Cubit<ProductState> {
       getProductsStatus: BlocStatus.loading(data: existing),
     ));
 
-    try {
-      final products = await getProducts();
-      if (products.isEmpty) {
+    final result = await getProducts(const NoParams());
+
+    result.fold(
+      (failure) {
         emit(state.copyWith(
-          getProductsStatus: const BlocStatus.empty(),
+          getProductsStatus: BlocStatus.fail(
+            error: failure.message,
+            data: existing,
+          ),
         ));
-      } else {
-        emit(state.copyWith(
-          getProductsStatus: BlocStatus.success(data: products),
-        ));
-      }
-    } catch (e) {
-      emit(state.copyWith(
-        getProductsStatus: BlocStatus.fail(error: e.toString(), data: existing),
-      ));
-    }
+      },
+      (products) {
+        if (products.isEmpty) {
+          emit(state.copyWith(
+            getProductsStatus: const BlocStatus.empty(),
+          ));
+        } else {
+          emit(state.copyWith(
+            getProductsStatus: BlocStatus.success(data: products),
+          ));
+        }
+      },
+    );
   }
 
   /// Add product from form with proper state management
@@ -58,48 +66,50 @@ class ProductCubit extends Cubit<ProductState> {
       addProductStatus: const BlocStatus.loading(),
     ));
 
-    try {
-      // Validate input
-      if (name.isEmpty || storeName.isEmpty || category.isEmpty || price <= 0) {
-        emit(state.copyWith(
-          addProductStatus: const BlocStatus.fail(
-            error: 'جميع الحقول مطلوبة والسعر يجب أن يكون أكبر من صفر',
-          ),
-        ));
-        return false;
-      }
-
-      // Create new product with multiple images
-      final newProduct = Product(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        name: name,
-        storeName: storeName,
-        price: price,
-        category: category,
-        imageUrls: imageUrls != null && imageUrls.isNotEmpty
-            ? imageUrls
-            : [AppStrings.sampleImageUrl],
-      );
-
-      // Add product through usecase
-      await addProduct(newProduct);
-
-      // Reload products to get the updated list
-      await loadProducts();
-
-      // Emit success state
+    // Validate input
+    if (name.isEmpty || storeName.isEmpty || category.isEmpty || price <= 0) {
       emit(state.copyWith(
-        addProductStatus: BlocStatus.success(data: newProduct),
-      ));
-
-      return true;
-    } catch (e) {
-      // Emit failure state
-      emit(state.copyWith(
-        addProductStatus: BlocStatus.fail(error: e.toString()),
+        addProductStatus: const BlocStatus.fail(
+          error: 'جميع الحقول مطلوبة والسعر يجب أن يكون أكبر من صفر',
+        ),
       ));
       return false;
     }
+
+    // Create new product with multiple images
+    final newProduct = Product(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      name: name,
+      storeName: storeName,
+      price: price,
+      category: category,
+      imageUrls: imageUrls != null && imageUrls.isNotEmpty
+          ? imageUrls
+          : [AppStrings.sampleImageUrl],
+    );
+
+    // Add product through usecase
+    final result = await addProduct(AddProductParams(product: newProduct));
+
+    return result.fold(
+      (failure) {
+        // Emit failure state
+        emit(state.copyWith(
+          addProductStatus: BlocStatus.fail(error: failure.message),
+        ));
+        return false;
+      },
+      (addedProduct) async {
+        // Reload products to get the updated list
+        await loadProducts();
+
+        // Emit success state
+        emit(state.copyWith(
+          addProductStatus: BlocStatus.success(data: addedProduct),
+        ));
+        return true;
+      },
+    );
   }
 
   /// Filter products by category
@@ -123,14 +133,21 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   Future<void> removeProduct(String productId) async {
-    try {
-      await deleteProduct(productId);
-      await loadProducts();
-    } catch (e) {
-      final existing = state.getProductsStatus.data ?? [];
-      emit(state.copyWith(
-        getProductsStatus: BlocStatus.fail(error: e.toString(), data: existing),
-      ));
-    }
+    final result = await deleteProduct(DeleteProductParams(productId: productId));
+
+    result.fold(
+      (failure) {
+        final existing = state.getProductsStatus.data ?? [];
+        emit(state.copyWith(
+          getProductsStatus: BlocStatus.fail(
+            error: failure.message,
+            data: existing,
+          ),
+        ));
+      },
+      (_) async {
+        await loadProducts();
+      },
+    );
   }
 }
