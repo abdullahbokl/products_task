@@ -12,14 +12,21 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      elevation: 0,
+      margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        spacing: 8,
         children: [
-          ProductImage(imageUrls: product.imageUrls),
-          ProductDetails(price: product.price),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: SizedBox(
+              width: 114,
+              height: 115,
+              child: ProductImage(imageUrls: product.imageUrls),
+            ),
+          ),
+          Expanded(child: ProductDetails(price: product.price)),
         ],
       ),
     );

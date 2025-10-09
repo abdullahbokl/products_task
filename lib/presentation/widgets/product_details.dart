@@ -7,48 +7,52 @@ import '../../core/widgets/app_text.dart';
 class ProductDetails extends StatelessWidget {
   final double price;
 
-  const ProductDetails({
-    super.key,
-    required this.price,
-  });
+  const ProductDetails({super.key, required this.price});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AppText(
-            AppStrings.productPlaceholderText,
-            style: AppTextStyles.heading3,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 12,
+      children: [
+        const AppText(
+          AppStrings.productPlaceholderText,
+          style: AppTextStyles.heading3,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.right,
+        ),
+        RichText(
+          textAlign: TextAlign.right,
+          text: TextSpan(
+            style: DefaultTextStyle.of(context).style,
+            children: [
+              TextSpan(
+                text: '${price.toStringAsFixed(0)} ',
+                style: AppTextStyles.price,
+              ),
+              TextSpan(
+                text: AppStrings.currencyDollar,
+                style: AppTextStyles.bodySmall.copyWith(
+                  color: AppColors.darkGray,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
-          AppText(
-            '${price.toStringAsFixed(0)} ${AppStrings.currencyDollar}',
-            style: AppTextStyles.price,
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: AppColors.lightGray,
+            borderRadius: BorderRadius.circular(6),
           ),
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 4,
-            ),
-            decoration: BoxDecoration(
-              color: AppColors.lightGray,
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: const AppText(
-              AppStrings.storeName,
-              style: AppTextStyles.caption,
-            ),
+          child: const AppText(
+            AppStrings.storeName,
+            style: AppTextStyles.caption,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
-
