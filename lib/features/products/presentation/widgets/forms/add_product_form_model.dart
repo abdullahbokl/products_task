@@ -11,6 +11,9 @@ class AddProductFormModel {
   // Category is now selectable only, not a text field
   ProductCategory? selectedCategory;
 
+  // Multiple image paths support
+  List<String> imagePaths = [];
+
   AddProductFormModel()
       : formKey = GlobalKey<FormState>(),
         nameController = TextEditingController(),
@@ -40,6 +43,18 @@ class AddProductFormModel {
         price > 0;
   }
 
+  /// Add image path to the list
+  void addImage(String path) {
+    imagePaths.add(path);
+  }
+
+  /// Remove image at index
+  void removeImage(int index) {
+    if (index >= 0 && index < imagePaths.length) {
+      imagePaths.removeAt(index);
+    }
+  }
+
   /// Get form data as a map (deprecated - use individual getters instead)
   @Deprecated('Use individual getters (name, storeName, price, category) instead')
   Map<String, dynamic> toMap() {
@@ -56,7 +71,8 @@ class AddProductFormModel {
     return name.isNotEmpty ||
         priceController.text.trim().isNotEmpty ||
         storeName.isNotEmpty ||
-        selectedCategory != null;
+        selectedCategory != null ||
+        imagePaths.isNotEmpty;
   }
 
   /// Clear all form fields
@@ -65,6 +81,7 @@ class AddProductFormModel {
     priceController.clear();
     storeNameController.clear();
     selectedCategory = null;
+    imagePaths.clear();
   }
 
   /// Dispose all controllers

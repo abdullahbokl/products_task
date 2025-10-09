@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../../../core/constants/app_dimensions.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/form_validators.dart';
@@ -9,7 +10,7 @@ import '../../cubit/product_cubit.dart';
 import 'add_product_form_model.dart';
 import 'custom_text_form_field.dart';
 import 'category_dropdown_field.dart';
-import 'image_picker_section.dart';
+import 'multi_image_picker_section.dart';
 import 'submit_button.dart';
 
 class AddProductForm extends StatefulWidget {
@@ -21,7 +22,7 @@ class AddProductForm extends StatefulWidget {
 
 class _AddProductFormState extends State<AddProductForm> {
   late final AddProductFormModel _formModel;
-  String? _selectedImageUrl;
+  final ImagePicker _imagePicker = ImagePicker();
 
   @override
   void initState() {
@@ -35,6 +36,30 @@ class _AddProductFormState extends State<AddProductForm> {
     super.dispose();
   }
 
+  Future<void> _pickImage() async {
+    try {
+      final XFile? image = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 80,
+      );
+
+      if (image != null) {
+        setState(() {
+          _formModel.addImage(image.path);
+        });
+      }
+    } catch (e) {
+      if (!mounted) return;
+      AppSnackBar.showError(context, 'فشل في اختيار الصورة');
+    }
+  }
+
+  void _removeImage(int index) {
+    setState(() {
+      _formModel.removeImage(index);
+    });
+  }
+
   Future<void> _submitForm() async {
     // Validate form
     if (!_formModel.validate()) return;
@@ -45,7 +70,9 @@ class _AddProductFormState extends State<AddProductForm> {
           storeName: _formModel.storeName,
           price: _formModel.price,
           category: _formModel.category,
-          imageUrl: _selectedImageUrl,
+          imageUrls: _formModel.imagePaths.isNotEmpty
+              ? _formModel.imagePaths
+              : null,
         );
 
     // Handle UI based on result
@@ -79,11 +106,10 @@ class _AddProductFormState extends State<AddProductForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                ImagePickerSection(
-                  imageUrl: _selectedImageUrl,
-                  onTap: () => setState(
-                    () => _selectedImageUrl = 'https://via.placeholder.com/400',
-                  ),
+                MultiImagePickerSection(
+                  imagePaths: _formModel.imagePaths,
+                  onAddImage: _pickImage,
+                  onRemoveImage: _removeImage,
                 ),
                 const SizedBox(height: AppDimensions.spacingXLarge),
                 CustomTextFormField(

@@ -65,7 +65,7 @@ class ProductCubit extends Cubit<ProductState> {
     required String storeName,
     required double price,
     required String category,
-    String? imageUrl,
+    List<String>? imageUrls,
   }) async {
     // Emit loading state
     emit(state.copyWith(
@@ -85,14 +85,16 @@ class ProductCubit extends Cubit<ProductState> {
 
       final currentProducts = state.getProductsStatus.data ?? [];
 
-      // Create new product
+      // Create new product with multiple images
       final newProduct = Product(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         name: name,
         storeName: storeName,
         price: price,
         category: category,
-        imageUrls: imageUrl != null ? [imageUrl] : [AppStrings.sampleImageUrl],
+        imageUrls: imageUrls != null && imageUrls.isNotEmpty
+            ? imageUrls
+            : [AppStrings.sampleImageUrl],
       );
 
       final updatedProducts = [newProduct, ...currentProducts];
