@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/product.dart';
 import 'product_card.dart';
+import 'product_horizontal_grid_view.dart';
 
 class ProductListWidget extends StatelessWidget {
   final List<Product> products;
@@ -15,21 +16,7 @@ class ProductListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isHorizontal) {
-      return SizedBox(
-        height: 280,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: products.length,
-          itemBuilder: (context, index) {
-            return Container(
-              width: 150,
-              margin: const EdgeInsets.only(right: 16),
-              child: ProductCard(product: products[index]),
-            );
-          },
-        ),
-      );
+      return ProductHorizontalGridView(products: products);
     } else {
       return ListView.builder(
         padding: const EdgeInsets.all(16),
@@ -44,4 +31,3 @@ class ProductListWidget extends StatelessWidget {
     }
   }
 }
-
