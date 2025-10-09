@@ -126,9 +126,9 @@ lib/
     <td><img src="screenshots/2025-10-09 18 32 13 316  Gemoo Snap.png" alt="Category Filtering" width="250"/></td>
   </tr>
   <tr>
-    <td align="center"><b>Product List - Horizontal</b></td>
-    <td align="center"><b>Product List - Vertical</b></td>
     <td align="center"><b>Category Filtering</b></td>
+    <td align="center"><b>Add Product Screen</b></td>
+    <td align="center"><b>Images Picking</b></td>
   </tr>
   <tr>
     <td><img src="screenshots/2025-10-09 18 37 19 864  Gemoo Snap.png" alt="Add Product Form" width="250"/></td>
@@ -136,8 +136,8 @@ lib/
     <td></td>
   </tr>
   <tr>
-    <td align="center"><b>Add Product Screen</b></td>
-    <td align="center"><b>Product Management</b></td>
+    <td align="center"><b>Add Product Screen Validation</b></td>
+    <td align="center"><b>Product List - Horizontal</b></td>
     <td></td>
   </tr>
 </table>
