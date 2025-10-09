@@ -31,7 +31,7 @@ class AppStrings {
   static String priceHint(BuildContext context) => 'أدخل سعر المنتج';
   static String storeNameLabel(BuildContext context) => 'اسم المتجر';
   static String storeNameHint(BuildContext context) => 'أدخل اسم المتجر';
-  static String categoryLabel(BuildContext context) => 'الفئة';
+  static String categoryLabel(BuildContext context) => 'التصنيف';
   static String categoryHint(BuildContext context) => 'اختر فئة المنتج';
   static String addProductImage(BuildContext context) => 'إضافة صورة المنتج';
   static String fieldRequired(BuildContext context) => 'هذا الحقل مطلوب';

@@ -79,6 +79,20 @@ class _AddProductFormState extends State<AddProductForm> {
             ),
             const SizedBox(height: AppDimensions.spacingLarge),
 
+            // Store Name Field
+            _buildTextField(
+              controller: _storeNameController,
+              label: AppStrings.storeNameLabel(context),
+              hint: AppStrings.storeNameHint(context),
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return AppStrings.fieldRequired(context);
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: AppDimensions.spacingLarge),
+
             // Price Field
             _buildTextField(
               controller: _priceController,
@@ -91,20 +105,6 @@ class _AddProductFormState extends State<AddProductForm> {
                 }
                 if (double.tryParse(value!) == null) {
                   return AppStrings.invalidPrice(context);
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: AppDimensions.spacingLarge),
-
-            // Store Name Field
-            _buildTextField(
-              controller: _storeNameController,
-              label: AppStrings.storeNameLabel(context),
-              hint: AppStrings.storeNameHint(context),
-              validator: (value) {
-                if (value?.isEmpty ?? true) {
-                  return AppStrings.fieldRequired(context);
                 }
                 return null;
               },
@@ -208,9 +208,7 @@ class _AddProductFormState extends State<AddProductForm> {
       ),
       child: AppText(
         AppStrings.addProductButton(context),
-        style: const TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 16,
+        style: AppTextStyles.bodyLarge.copyWith(
           fontWeight: FontWeight.bold,
           color: AppColors.white,
         ),
