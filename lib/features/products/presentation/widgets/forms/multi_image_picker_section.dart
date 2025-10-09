@@ -11,12 +11,14 @@ class MultiImagePickerSection extends StatelessWidget {
   final List<String> imagePaths;
   final VoidCallback onAddImage;
   final Function(int) onRemoveImage;
+  final bool isLoading;
 
   const MultiImagePickerSection({
     super.key,
     required this.imagePaths,
     required this.onAddImage,
     required this.onRemoveImage,
+    this.isLoading = false,
   });
 
   @override
@@ -34,7 +36,7 @@ class MultiImagePickerSection extends StatelessWidget {
         const SizedBox(height: AppDimensions.spacingSmall),
 
         // Vertical list of images
-        if (imagePaths.isNotEmpty) ...[
+        if (imagePaths.isNotEmpty || isLoading) ...[
           // Images grid
           SizedBox(
             height: AppDimensions.imagePickerGridHeight,
@@ -45,8 +47,12 @@ class MultiImagePickerSection extends StatelessWidget {
                 mainAxisSpacing: AppDimensions.spacingMedium,
                 childAspectRatio: 1,
               ),
-              itemCount: imagePaths.length,
+              itemCount: imagePaths.length + (isLoading ? 1 : 0),
               itemBuilder: (context, index) {
+                // Show loading placeholder as the last item
+                if (isLoading && index == imagePaths.length) {
+                  return _buildLoadingItem();
+                }
                 return _buildImageItem(imagePaths[index], index);
               },
             ),
@@ -57,6 +63,22 @@ class MultiImagePickerSection extends StatelessWidget {
         // Add button always at the bottom
         _buildAddButton(),
       ],
+    );
+  }
+
+  Widget _buildLoadingItem() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+        border: Border.all(
+          color: AppColors.borderGray,
+          width: AppDimensions.cardBorderWidth,
+        ),
+        color: AppColors.lightGray,
+      ),
+      child: const Center(
+        child: AppLoader(size: 30),
+      ),
     );
   }
 
@@ -103,7 +125,7 @@ class MultiImagePickerSection extends StatelessWidget {
                 width: AppDimensions.iconSizeSmall,
                 height: AppDimensions.iconSizeSmall,
                 decoration: BoxDecoration(
-                  color: AppColors.accentRed.withOpacity(0.8),
+                  color: AppColors.accentRed.withValues(alpha: 0.8),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(

@@ -1,10 +1,5 @@
 /// Product categories enum
 enum ProductCategory {
-  architecture(
-    'الهندسة المعمارية',
-    'Architecture',
-    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400',
-  ),
   electronics(
     'الإلكترونيات',
     'Electronics',
@@ -39,6 +34,11 @@ enum ProductCategory {
     'الألعاب',
     'Toys',
     'https://images.unsplash.com/photo-1558877385-09dd715f6a2c?w=400',
+  ),
+  architecture(
+    'الهندسة المعمارية',
+    'Architecture',
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400',
   );
 
   final String arabicName;

@@ -25,6 +25,7 @@ class AddProductForm extends StatefulWidget {
 class _AddProductFormState extends State<AddProductForm> {
   late final AddProductFormModel _formModel;
   final ImagePicker _imagePicker = ImagePicker();
+  bool _isPickingImage = false;
 
   @override
   void initState() {
@@ -40,6 +41,10 @@ class _AddProductFormState extends State<AddProductForm> {
 
   Future<void> _pickImage() async {
     try {
+      setState(() {
+        _isPickingImage = true;
+      });
+
       final XFile? image = await _imagePicker.pickImage(
         source: ImageSource.gallery,
         imageQuality: 80,
@@ -48,9 +53,17 @@ class _AddProductFormState extends State<AddProductForm> {
       if (image != null) {
         setState(() {
           _formModel.addImage(image.path);
+          _isPickingImage = false;
+        });
+      } else {
+        setState(() {
+          _isPickingImage = false;
         });
       }
     } catch (e) {
+      setState(() {
+        _isPickingImage = false;
+      });
       if (!mounted) return;
       AppSnackBar.showError(context, 'فشل في اختيار الصورة');
     }
@@ -112,6 +125,7 @@ class _AddProductFormState extends State<AddProductForm> {
                   imagePaths: _formModel.imagePaths,
                   onAddImage: _pickImage,
                   onRemoveImage: _removeImage,
+                  isLoading: _isPickingImage,
                 ),
                 const SizedBox(height: AppDimensions.spacingXLarge),
                 CustomTextFormField(

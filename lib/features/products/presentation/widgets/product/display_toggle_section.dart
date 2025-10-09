@@ -37,7 +37,9 @@ class DisplayToggleSection extends StatelessWidget {
               isHorizontal
                   ? AppStrings.toggleToVertical(context)
                   : AppStrings.toggleToHorizontal(context),
-              style: AppTextStyles.accent,
+              style: AppTextStyles.accent.copyWith(
+                fontSize: 12,
+              ),
             ),
           ],
         ),
