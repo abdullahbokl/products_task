@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/enums/product_category.dart';
 
 /// Form model to manage add product form state and controllers
 class AddProductFormModel {
@@ -6,14 +7,15 @@ class AddProductFormModel {
   final TextEditingController nameController;
   final TextEditingController priceController;
   final TextEditingController storeNameController;
-  final TextEditingController categoryController;
+
+  // Category is now selectable only, not a text field
+  ProductCategory? selectedCategory;
 
   AddProductFormModel()
       : formKey = GlobalKey<FormState>(),
         nameController = TextEditingController(),
         priceController = TextEditingController(),
-        storeNameController = TextEditingController(),
-        categoryController = TextEditingController();
+        storeNameController = TextEditingController();
 
   /// Validate the form
   bool validate() => formKey.currentState?.validate() ?? false;
@@ -27,14 +29,14 @@ class AddProductFormModel {
   /// Get price as double (handles parsing and defaults to 0.0 if invalid)
   double get price => double.tryParse(priceController.text.trim()) ?? 0.0;
 
-  /// Get category
-  String get category => categoryController.text.trim();
+  /// Get category name (returns English name if selected, empty string otherwise)
+  String get category => selectedCategory?.englishName ?? '';
 
   /// Check if all required fields are filled
   bool get isValid {
     return name.isNotEmpty &&
         storeName.isNotEmpty &&
-        category.isNotEmpty &&
+        selectedCategory != null &&
         price > 0;
   }
 
@@ -54,7 +56,7 @@ class AddProductFormModel {
     return name.isNotEmpty ||
         priceController.text.trim().isNotEmpty ||
         storeName.isNotEmpty ||
-        category.isNotEmpty;
+        selectedCategory != null;
   }
 
   /// Clear all form fields
@@ -62,7 +64,7 @@ class AddProductFormModel {
     nameController.clear();
     priceController.clear();
     storeNameController.clear();
-    categoryController.clear();
+    selectedCategory = null;
   }
 
   /// Dispose all controllers
@@ -70,6 +72,5 @@ class AddProductFormModel {
     nameController.dispose();
     priceController.dispose();
     storeNameController.dispose();
-    categoryController.dispose();
   }
 }

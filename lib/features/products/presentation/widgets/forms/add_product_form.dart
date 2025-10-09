@@ -8,6 +8,7 @@ import '../../../../../core/widgets/app_snackbar.dart';
 import '../../cubit/product_cubit.dart';
 import 'add_product_form_model.dart';
 import 'custom_text_form_field.dart';
+import 'category_dropdown_field.dart';
 import 'image_picker_section.dart';
 import 'submit_button.dart';
 
@@ -124,14 +125,21 @@ class _AddProductFormState extends State<AddProductForm> {
                   ],
                 ),
                 const SizedBox(height: AppDimensions.spacingLarge),
-                CustomTextFormField(
-                  controller: _formModel.categoryController,
+                CategoryDropdownField(
                   label: AppStrings.categoryLabel(context),
                   hint: AppStrings.categoryHint(context),
-                  validator: FormValidators.required(
-                    context,
-                    message: AppStrings.fieldRequired(context),
-                  ),
+                  selectedCategory: _formModel.selectedCategory,
+                  onChanged: (category) {
+                    setState(() {
+                      _formModel.selectedCategory = category;
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null) {
+                      return AppStrings.fieldRequired(context);
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: AppDimensions.spacingXLarge),
                 SubmitButton(
