@@ -35,6 +35,10 @@ class AppDimensions {
   static const double productCardImageWidthCompact = 100.0;
   static const double productCardImageHeightCompact = 100.0;
 
+  // Image Picker
+  static const double imagePickerGridHeight = 120.0;
+  static const double imagePickerButtonHeight = 60.0;
+
   // Category Card
   static const double categoryCardWidth = 100.0;
   static const double categoryCardHeight = 120.0;
@@ -47,4 +51,3 @@ class AppDimensions {
   static const double shadowOffsetY = 2.0;
   static const double shadowOpacity = 0.1;
 }
-

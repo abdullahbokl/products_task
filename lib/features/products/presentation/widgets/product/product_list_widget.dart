@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_dimensions.dart';
+import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/widgets/app_text.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/common/widgets/app_text.dart';
 import '../../../domain/entities/product.dart';
 import 'product_card.dart';
 import 'product_horizontal_grid_view.dart';
@@ -29,12 +30,12 @@ class ProductListWidget extends StatelessWidget {
             children: [
               Icon(
                 Icons.inventory_2_outlined,
-                size: 80,
+                size: AppDimensions.iconSizeLarge,
                 color: AppColors.mediumGray,
               ),
               const SizedBox(height: AppDimensions.spacingLarge),
               AppText(
-                'لا توجد منتجات في هذه الفئة',
+                AppStrings.noCategoryProducts(context),
                 style: AppTextStyles.heading3.copyWith(
                   color: AppColors.mediumGray,
                 ),
@@ -42,7 +43,7 @@ class ProductListWidget extends StatelessWidget {
               ),
               const SizedBox(height: AppDimensions.spacingSmall),
               AppText(
-                'اختر فئة أخرى أو أضف منتجات جديدة',
+                AppStrings.noCategoryProductsHint(context),
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.mediumGray,
                 ),

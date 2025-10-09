@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_dimensions.dart';
-import '../../../../../core/enums/product_category.dart';
+import '../../../../../core/utils/app_dimensions.dart';
+import '../../../../../core/common/enums/product_category.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/widgets/app_text.dart';
+import '../../../../../core/common/widgets/app_text.dart';
 import 'form_field_label.dart';
 
 class CategoryDropdownField extends StatelessWidget {

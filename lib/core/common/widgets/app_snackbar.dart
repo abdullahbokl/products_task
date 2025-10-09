@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../constants/app_dimensions.dart';
-import '../utils/colors.dart';
-import '../utils/text_styles.dart';
+import '../../utils/app_dimensions.dart';
+import '../../utils/colors.dart';
+import '../../utils/text_styles.dart';
 import 'app_text.dart';
 
 /// Custom SnackBar utility for consistent messaging across the app

@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../common/enums/state_status.dart';
 import '../common/widgets/app_loader.dart';
-import '../widgets/error_widget.dart';
+import '../common/widgets/error_widget.dart';
 
 class BlocStatus<T> extends Equatable {
   final StateStatus status;

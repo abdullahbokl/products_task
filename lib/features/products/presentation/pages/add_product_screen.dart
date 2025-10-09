@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_dimensions.dart';
+import '../../../../core/utils/app_dimensions.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/text_styles.dart';
-import '../../../../core/widgets/app_text.dart';
-import '../../../../core/widgets/custom_icon_button.dart';
+import '../../../../core/common/widgets/app_text.dart';
+import '../../../../core/common/widgets/custom_icon_button.dart';
 import '../widgets/forms/add_product_form.dart';
 
 class AddProductScreen extends StatelessWidget {

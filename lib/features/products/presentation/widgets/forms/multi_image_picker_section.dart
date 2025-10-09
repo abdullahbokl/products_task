@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_dimensions.dart';
+import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/widgets/app_text.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/common/widgets/app_text.dart';
 
 class MultiImagePickerSection extends StatelessWidget {
   final List<String> imagePaths;
@@ -23,7 +24,7 @@ class MultiImagePickerSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppText(
-          'صور المنتج',
+          AppStrings.productImagesLabel(context),
           style: AppTextStyles.bodyMedium.copyWith(
             fontWeight: FontWeight.w600,
             color: AppColors.darkGray,
@@ -35,7 +36,7 @@ class MultiImagePickerSection extends StatelessWidget {
         if (imagePaths.isNotEmpty) ...[
           // Images grid
           SizedBox(
-            height: 120,
+            height: AppDimensions.imagePickerGridHeight,
             child: GridView.builder(
               scrollDirection: Axis.horizontal,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -92,16 +93,16 @@ class MultiImagePickerSection extends StatelessWidget {
             child: GestureDetector(
               onTap: () => onRemoveImage(index),
               child: Container(
-                width: 22,
-                height: 22,
+                width: AppDimensions.iconSizeSmall,
+                height: AppDimensions.iconSizeSmall,
                 decoration: BoxDecoration(
-                  color: AppColors.accentRed.withOpacity(0.6),
+                  color: AppColors.accentRed.withOpacity(0.8),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
                   Icons.close,
                   color: AppColors.white,
-                  size: 20,
+                  size: AppDimensions.spacingLarge,
                 ),
               ),
             ),
@@ -115,7 +116,7 @@ class MultiImagePickerSection extends StatelessWidget {
     return GestureDetector(
       onTap: onAddImage,
       child: Container(
-        height: 60,
+        height: AppDimensions.imagePickerButtonHeight,
         decoration: BoxDecoration(
           color: AppColors.primaryGreen,
           borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
@@ -123,7 +124,7 @@ class MultiImagePickerSection extends StatelessWidget {
         child: const Center(
           child: Icon(
             Icons.add,
-            size: 32,
+            size: AppDimensions.iconSizeMedium,
             color: AppColors.white,
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../constants/app_dimensions.dart';
-import '../utils/colors.dart';
+import '../../utils/app_dimensions.dart';
+import '../../utils/colors.dart';
 
 /// Reusable custom icon button with consistent styling
 class CustomIconButton extends StatelessWidget {

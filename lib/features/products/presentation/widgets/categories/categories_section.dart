@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/constants/app_dimensions.dart';
+import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/widgets/app_text.dart';
-import '../../../../../core/enums/product_category.dart';
+import '../../../../../core/common/widgets/app_text.dart';
+import '../../../../../core/common/enums/product_category.dart';
 import '../../cubit/product_cubit.dart';
 import 'category_card.dart';
 import 'view_all_categories_button.dart';

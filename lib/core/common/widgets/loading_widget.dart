@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
-import '../utils/text_styles.dart';
+import '../../utils/colors.dart';
+import '../../utils/text_styles.dart';
 import 'app_text.dart';
 
 class LoadingWidget extends StatelessWidget {

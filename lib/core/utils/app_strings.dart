@@ -33,10 +33,15 @@ class AppStrings {
   static String storeNameHint(BuildContext context) => 'أدخل اسم المتجر';
   static String categoryLabel(BuildContext context) => 'التصنيف';
   static String categoryHint(BuildContext context) => 'اختر فئة المنتج';
+  static String productImagesLabel(BuildContext context) => 'صور المنتج';
   static String addProductImage(BuildContext context) => 'إضافة صورة المنتج';
   static String fieldRequired(BuildContext context) => 'هذا الحقل مطلوب';
   static String invalidPrice(BuildContext context) => 'السعر غير صحيح';
   static String productAddedSuccess(BuildContext context) => 'تم إضافة المنتج بنجاح';
+
+  // Empty Category State
+  static String noCategoryProducts(BuildContext context) => 'لا توجد منتجات في هذه الفئة';
+  static String noCategoryProductsHint(BuildContext context) => 'اختر فئة أخرى أو أضف منتجات جديدة';
 
   // Image URLs remain static
   static const String sampleImageUrl = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400';

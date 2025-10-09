@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../../../core/constants/app_dimensions.dart';
-import '../../../../../core/widgets/app_text_field.dart';
+import '../../../../../core/utils/app_dimensions.dart';
+import '../../../../../core/common/widgets/app_text_field.dart';
 import 'form_field_label.dart';
 
 class CustomTextFormField extends StatelessWidget {

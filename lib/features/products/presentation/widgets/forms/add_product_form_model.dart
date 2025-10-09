@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/enums/product_category.dart';
+import '../../../../../core/common/enums/product_category.dart';
 
 /// Form model to manage add product form state and controllers
 class AddProductFormModel {
