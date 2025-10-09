@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/services/service_locator/service_locator.dart'
-    show configureDependencies;
+    show configureDependencies, getIt;
+import 'core/services/navigation/navigation_service.dart';
 import 'core/utils/themes.dart';
 import 'core/localization/app_localization_delegate.dart';
 import 'features/products/presentation/pages/product_list_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       theme: AppThemes.lightTheme,
       home: const ProductListScreen(),
       debugShowCheckedModeBanner: false,
+      navigatorKey: getIt<NavigationService>().navigatorKey,
       locale: const Locale('ar', 'SA'),
       supportedLocales: const [Locale('ar', 'SA'), Locale('en', 'US')],
       localizationsDelegates: const [

@@ -6,6 +6,8 @@ import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/form_validators.dart';
 import '../../../../../core/common/widgets/app_snackbar.dart';
+import '../../../../../core/services/service_locator/service_locator.dart';
+import '../../../../../core/services/navigation/navigation_service.dart';
 import '../../cubit/product_cubit.dart';
 import 'add_product_form_model.dart';
 import 'custom_text_form_field.dart';
@@ -79,7 +81,7 @@ class _AddProductFormState extends State<AddProductForm> {
     if (!mounted) return;
 
     if (success) {
-      Navigator.of(context).pop();
+      getIt<NavigationService>().pop();
       AppSnackBar.showSuccess(
         context,
         AppStrings.productAddedSuccess(context),

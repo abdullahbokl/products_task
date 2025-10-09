@@ -6,6 +6,8 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/common/widgets/app_text.dart';
 import '../../../../../core/common/widgets/custom_icon_button.dart';
 import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/services/service_locator/service_locator.dart';
+import '../../../../../core/services/navigation/navigation_service.dart';
 import '../../cubit/product_cubit.dart';
 import '../../pages/add_product_screen.dart';
 
@@ -30,12 +32,10 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           CustomIconButton.appBarAdd(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (ctx) => BlocProvider.value(
-                    value: context.read<ProductCubit>(),
-                    child: const AddProductScreen(),
-                  ),
+              getIt<NavigationService>().pushPage(
+                BlocProvider.value(
+                  value: context.read<ProductCubit>(),
+                  child: const AddProductScreen(),
                 ),
               );
             },

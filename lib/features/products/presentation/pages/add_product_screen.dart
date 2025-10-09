@@ -5,6 +5,8 @@ import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../../core/common/widgets/app_text.dart';
 import '../../../../core/common/widgets/custom_icon_button.dart';
+import '../../../../core/services/service_locator/service_locator.dart';
+import '../../../../core/services/navigation/navigation_service.dart';
 import '../widgets/forms/add_product_form.dart';
 
 class AddProductScreen extends StatelessWidget {
@@ -20,7 +22,7 @@ class AddProductScreen extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: CustomIconButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => getIt<NavigationService>().pop(),
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
               color: Colors.black,

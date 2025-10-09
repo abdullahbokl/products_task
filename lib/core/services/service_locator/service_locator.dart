@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:products_task/core/services/service_locator/service_locator.config.dart'
     show $initGetIt;
 
+import 'package:products_task/core/services/navigation/navigation_service.dart';
 import 'package:products_task/features/products/data/datasources/local_product_datasource.dart';
 import 'package:products_task/features/products/data/repositories/product_repository_impl.dart';
 import 'package:products_task/features/products/domain/repositories/product_repository.dart';
@@ -23,6 +24,13 @@ final GetIt getIt = GetIt.I;
 Future<GetIt> configureDependencies() async {
   // call generated registrations (if any)
   $initGetIt(getIt);
+
+  // Register NavigationService as a singleton
+  if (!getIt.isRegistered<NavigationService>()) {
+    getIt.registerLazySingleton<NavigationService>(
+      () => NavigationService(),
+    );
+  }
 
   // Manual registrations (guarded to avoid duplicate registration when codegen is used)
   if (!getIt.isRegistered<LocalProductDataSource>()) {
