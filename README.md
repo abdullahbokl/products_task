@@ -119,20 +119,28 @@ lib/
 
 ## 📸 Screenshots
 
-### Product List Screen
-<img src="screenshots/2025-10-09 18 31 41 105  Gemoo Snap.png" width="250" alt="Product List - Horizontal View">
-
-### Product List - Vertical Layout
-<img src="screenshots/2025-10-09 18 31 54 249  Gemoo Snap.png" width="250" alt="Product List - Vertical View">
-
-### Category Filtering
-<img src="screenshots/2025-10-09 18 32 13 316  Gemoo Snap.png" width="250" alt="Category Filtering">
-
-### Add Product Screen
-<img src="screenshots/2025-10-09 18 37 19 864  Gemoo Snap.png" width="250" alt="Add Product Form">
-
-### Product Management
-<img src="screenshots/2025-10-09 18 37 37 404  Gemoo Snap.png" width="250" alt="Product Management">
+<table>
+  <tr>
+    <td><img src="screenshots/2025-10-09 18 31 41 105  Gemoo Snap.png" alt="Product List - Horizontal View" width="250"/></td>
+    <td><img src="screenshots/2025-10-09 18 31 54 249  Gemoo Snap.png" alt="Product List - Vertical View" width="250"/></td>
+    <td><img src="screenshots/2025-10-09 18 32 13 316  Gemoo Snap.png" alt="Category Filtering" width="250"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Product List - Horizontal</b></td>
+    <td align="center"><b>Product List - Vertical</b></td>
+    <td align="center"><b>Category Filtering</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/2025-10-09 18 37 19 864  Gemoo Snap.png" alt="Add Product Form" width="250"/></td>
+    <td><img src="screenshots/2025-10-09 18 37 37 404  Gemoo Snap.png" alt="Product Management" width="250"/></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Add Product Screen</b></td>
+    <td align="center"><b>Product Management</b></td>
+    <td></td>
+  </tr>
+</table>
 
 ## 🚀 Getting Started
 
@@ -320,4 +328,3 @@ Developed with ❤️ using Flutter
 ---
 
 **Built with Flutter 3.35.5** 🚀
-
