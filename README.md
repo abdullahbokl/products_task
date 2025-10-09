@@ -4,14 +4,24 @@ A modern, responsive Flutter application for managing and browsing products with
 
 ## 📥 Download APK
 
-**Ready to try the app?** Download the latest release APK:
+**Ready to try the app?** Choose your preferred download:
 
-[![Download APK](https://img.shields.io/badge/Download-APK%20v1.0.0-brightgreen?style=for-the-badge&logo=android)](releases/products-task-v1.0.0.apk)
+### 🚀 Recommended: Architecture-Specific APKs (Smaller & Faster)
 
-**Direct Link:** [products-task-v1.0.0.apk](releases/products-task-v1.0.0.apk) (51.0 MB)
+| Architecture | Size | Download | Best For |
+|-------------|------|----------|----------|
+| **ARM 64-bit** | 20.1 MB | [![Download](https://img.shields.io/badge/Download-arm64--v8a-blue?style=flat-square&logo=android)](releases/products-task-v1.0.0-arm64-v8a.apk) | Most modern phones (2015+) ⭐ |
+| **ARM 32-bit** | 17.7 MB | [![Download](https://img.shields.io/badge/Download-armeabi--v7a-blue?style=flat-square&logo=android)](releases/products-task-v1.0.0-armeabi-v7a.apk) | Older Android devices |
+| **x86 64-bit** | 21.2 MB | [![Download](https://img.shields.io/badge/Download-x86__64-blue?style=flat-square&logo=android)](releases/products-task-v1.0.0-x86_64.apk) | Emulators & tablets |
+
+### 📦 Universal APK (All Devices)
+
+[![Download APK](https://img.shields.io/badge/Download-Universal%20APK%20(51MB)-brightgreen?style=for-the-badge&logo=android)](releases/products-task-v1.0.0.apk)
+
+**Not sure which to download?** → Download **ARM 64-bit** for most modern phones, or use the Universal APK.
 
 ### Installation
-1. Download the APK file
+1. Download the APK file (choose architecture-specific for smaller size)
 2. Enable "Install from Unknown Sources" in your Android settings
 3. Open the APK and install
 4. Enjoy the app!
