@@ -17,22 +17,26 @@ class AddProductScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         elevation: 0,
-        leading: CustomIconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: AppDimensions.iconSizeSmall,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CustomIconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+              size: AppDimensions.iconSizeSmall,
+            ),
+            size: AppDimensions.iconSizeLarge,
+            backgroundColor: AppColors.white,
+            borderColor: AppColors.borderGray,
+            borderWidth: AppDimensions.cardBorderWidth,
+            borderRadius: AppDimensions.radiusLarge,
+            padding: EdgeInsets.zero,
           ),
-          size: AppDimensions.iconSizeLarge,
-          backgroundColor: AppColors.white,
-          borderColor: AppColors.borderGray,
-          borderWidth: AppDimensions.cardBorderWidth,
-          borderRadius: AppDimensions.radiusLarge,
         ),
         title: AppText(
           AppStrings.addProductTitle(context),
-          style: AppTextStyles.heading1.copyWith(
+          style: AppTextStyles.heading2.copyWith(
             color: const Color(0xFF3E3E68),
           ),
         ),

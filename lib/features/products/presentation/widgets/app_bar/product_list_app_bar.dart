@@ -5,6 +5,7 @@ import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/common/widgets/app_text.dart';
 import '../../../../../core/common/widgets/custom_icon_button.dart';
+import '../../../../../core/utils/text_styles.dart';
 import '../../cubit/product_cubit.dart';
 import '../../pages/add_product_screen.dart';
 
@@ -23,11 +24,8 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
           const SizedBox(width: AppDimensions.iconSizeLarge),
           AppText(
             AppStrings.appBarProducts(context),
-            style: const TextStyle(
-              fontFamily: 'Montserrat',
-              fontSize: AppDimensions.spacingXLarge,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF3E3E68),
+            style: AppTextStyles.heading2.copyWith(
+              color: const Color(0xFF3E3E68),
             ),
           ),
           CustomIconButton.appBarAdd(

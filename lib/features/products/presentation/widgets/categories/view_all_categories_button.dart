@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/app_strings.dart';
@@ -26,7 +27,7 @@ class ViewAllCategoriesButton extends StatelessWidget {
           color: AppColors.primaryGreen,
           child: Center(
             child: Image.asset(
-              'assets/icons/element4ctg_all.png',
+              AppAssets.iconViewAll,
               width: AppDimensions.iconSizeMedium,
               height: AppDimensions.iconSizeMedium,
               color: AppColors.white,

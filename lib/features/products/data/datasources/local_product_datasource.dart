@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import '../../../../core/constants/app_assets.dart';
 import '../models/product_model.dart';
 
 abstract class LocalProductDataSource {
@@ -15,7 +16,7 @@ class LocalProductDataSourceImpl implements LocalProductDataSource {
   @override
   Future<List<ProductModel>> getProducts() async {
     if (_products.isEmpty) {
-      final String response = await rootBundle.loadString('assets/data/products.json');
+      final String response = await rootBundle.loadString(AppAssets.dataProducts);
       final List<dynamic> data = json.decode(response);
       _products = data.map((json) => ProductModel.fromJson(json)).toList();
     }

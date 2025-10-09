@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/app_dimensions.dart';
+import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/common/widgets/app_text.dart';
@@ -27,7 +28,7 @@ class DisplayToggleSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Image.asset(
-              'assets/icons/horizontal_vertical_icon.png',
+              AppAssets.iconToggleLayout,
               width: AppDimensions.iconSizeSmall,
               height: AppDimensions.iconSizeSmall,
             ),
