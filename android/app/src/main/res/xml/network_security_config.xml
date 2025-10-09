@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Allow all HTTPS connections -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!-- Trust preinstalled CAs -->
+            <certificates src="system" />
+            <!-- Additionally trust user-added CAs -->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Specific configuration for Unsplash and other image hosting services -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">unsplash.com</domain>
+        <domain includeSubdomains="true">images.unsplash.com</domain>
+        <domain includeSubdomains="true">source.unsplash.com</domain>
+        <domain includeSubdomains="true">picsum.photos</domain>
+    </domain-config>
+</network-security-config>
+
