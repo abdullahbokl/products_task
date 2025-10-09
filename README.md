@@ -1,6 +1,24 @@
-# Products Task
+# Products Task - Flutter E-Commerce Product Management App
 
 A modern, responsive Flutter application for managing and browsing products with support for multiple categories, bilingual interface (Arabic/English), and a clean, intuitive UI.
+
+## 📥 Download APK
+
+**Ready to try the app?** Download the latest release APK:
+
+[![Download APK](https://img.shields.io/badge/Download-APK%20v1.0.0-brightgreen?style=for-the-badge&logo=android)](releases/products-task-v1.0.0.apk)
+
+**Direct Link:** [products-task-v1.0.0.apk](releases/products-task-v1.0.0.apk) (51.0 MB)
+
+### Installation
+1. Download the APK file
+2. Enable "Install from Unknown Sources" in your Android settings
+3. Open the APK and install
+4. Enjoy the app!
+
+For detailed installation instructions and release notes, see [RELEASES.md](RELEASES.md).
+
+---
 
 ## 📱 App Overview
 
