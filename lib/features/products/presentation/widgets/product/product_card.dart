@@ -29,7 +29,13 @@ class ProductCard extends StatelessWidget {
               child: ProductImage(imageUrls: product.imageUrls),
             ),
           ),
-          Expanded(child: ProductDetails(price: product.price)),
+          Expanded(
+            child: ProductDetails(
+              name: product.name,
+              storeName: product.storeName,
+              price: product.price,
+            ),
+          ),
         ],
       ),
     );

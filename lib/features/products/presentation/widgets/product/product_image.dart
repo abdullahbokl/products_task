@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/colors.dart';
 
@@ -11,9 +12,26 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imageUrls.isNotEmpty
+    if (imageUrls.isEmpty) {
+      return const Center(
+        child: Icon(
+          Icons.image,
+          color: AppColors.mediumGray,
+          size: 48,
+        ),
+      );
+    }
+
+    // Get the first image from the list
+    final firstImage = imageUrls.first;
+
+    // Check if it's a network URL or local file path
+    final isNetworkImage =
+        firstImage.startsWith('http://') || firstImage.startsWith('https://');
+
+    return isNetworkImage
         ? Image.network(
-            imageUrls.first,
+            firstImage,
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
@@ -27,13 +45,20 @@ class ProductImage extends StatelessWidget {
               );
             },
           )
-        : const Center(
-            child: Icon(
-              Icons.image,
-              color: AppColors.mediumGray,
-              size: 48,
-            ),
+        : Image.file(
+            File(firstImage),
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            errorBuilder: (context, error, stackTrace) {
+              return const Center(
+                child: Icon(
+                  Icons.image_not_supported,
+                  color: AppColors.mediumGray,
+                  size: 48,
+                ),
+              );
+            },
           );
   }
 }
-

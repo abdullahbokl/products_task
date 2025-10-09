@@ -6,9 +6,16 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/app_text.dart';
 
 class ProductDetails extends StatelessWidget {
+  final String name;
+  final String storeName;
   final double price;
 
-  const ProductDetails({super.key, required this.price});
+  const ProductDetails({
+    super.key,
+    required this.name,
+    required this.storeName,
+    required this.price,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +26,7 @@ class ProductDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            AppStrings.productPlaceholderText(context),
+            name,
             style: AppTextStyles.heading3,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -36,7 +43,7 @@ class ProductDetails extends StatelessWidget {
                   style: AppTextStyles.price,
                 ),
                 TextSpan(
-                  text: '${AppStrings.currencyDollar(context)}',
+                  text: AppStrings.currencyDollar(context),
                   style: AppTextStyles.bodySmall.copyWith(
                     color: AppColors.darkGray,
                   ),
@@ -55,7 +62,7 @@ class ProductDetails extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
             ),
             child: AppText(
-              AppStrings.storeName(context),
+              storeName,
               style: AppTextStyles.caption,
             ),
           ),

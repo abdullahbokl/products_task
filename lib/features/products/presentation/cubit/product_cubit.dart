@@ -5,6 +5,7 @@ import '../../../../core/helpers/bloc_status.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/usecases/get_products.dart';
+import '../../domain/usecases/add_product.dart';
 import '../../domain/usecases/delete_product.dart';
 import '../widgets/categories/category_container.dart';
 import '../../../../core/utils/colors.dart';
@@ -13,10 +14,14 @@ part 'product_state.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   final GetProducts getProducts;
+  final AddProduct addProduct;
   final DeleteProduct deleteProduct;
 
-  ProductCubit({required this.getProducts, required this.deleteProduct})
-      : super(const ProductState());
+  ProductCubit({
+    required this.getProducts,
+    required this.addProduct,
+    required this.deleteProduct,
+  }) : super(const ProductState());
 
   Future<void> loadProducts() async {
     final existing = state.getProductsStatus.data;
@@ -83,8 +88,6 @@ class ProductCubit extends Cubit<ProductState> {
         return false;
       }
 
-      final currentProducts = state.getProductsStatus.data ?? [];
-
       // Create new product with multiple images
       final newProduct = Product(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -97,11 +100,14 @@ class ProductCubit extends Cubit<ProductState> {
             : [AppStrings.sampleImageUrl],
       );
 
-      final updatedProducts = [newProduct, ...currentProducts];
+      // Add product through usecase
+      await addProduct(newProduct);
+
+      // Reload products to get the updated list
+      await loadProducts();
 
       // Emit success state
       emit(state.copyWith(
-        getProductsStatus: BlocStatus.success(data: updatedProducts),
         addProductStatus: BlocStatus.success(data: newProduct),
       ));
 

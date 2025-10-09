@@ -24,7 +24,7 @@ class LocalProductDataSourceImpl implements LocalProductDataSource {
 
   @override
   Future<ProductModel> addProduct(ProductModel product) async {
-    _products.add(product);
+    _products.insert(0, product);
     return product;
   }
 

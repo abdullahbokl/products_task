@@ -38,7 +38,7 @@ class ProductCardCompact extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppText(
-                    AppStrings.productPlaceholderText(context),
+                    product.name,
                     style: AppTextStyles.bodySmall.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.darkGray,
@@ -67,7 +67,7 @@ class ProductCardCompact extends StatelessWidget {
                       borderRadius: BorderRadius.circular(AppDimensions.radiusSmall),
                     ),
                     child: AppText(
-                      AppStrings.storeName(context),
+                      product.storeName,
                       style: AppTextStyles.caption,
                     ),
                   ),
