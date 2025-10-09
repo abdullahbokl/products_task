@@ -34,7 +34,10 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const AddProductScreen(),
+                  builder: (ctx) => BlocProvider.value(
+                    value: context.read<ProductCubit>(),
+                    child: const AddProductScreen(),
+                  ),
                 ),
               );
             },

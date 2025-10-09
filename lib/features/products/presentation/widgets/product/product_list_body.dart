@@ -27,7 +27,7 @@ class _ProductListBodyState extends State<ProductListBody> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductCubit, ProductState>(
       builder: (context, state) {
-        return state.status.when(
+        return state.getProductsStatus.when(
           success: (products) {
             final list = products ?? [];
             if (list.isEmpty) return const EmptyProductsWidget();
@@ -48,4 +48,3 @@ class _ProductListBodyState extends State<ProductListBody> {
     );
   }
 }
-

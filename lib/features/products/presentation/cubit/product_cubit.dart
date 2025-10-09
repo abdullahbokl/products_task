@@ -16,27 +16,34 @@ class ProductCubit extends Cubit<ProductState> {
   final DeleteProduct deleteProduct;
 
   ProductCubit({required this.getProducts, required this.deleteProduct})
-    : super(ProductState.initial());
+      : super(const ProductState());
 
   Future<void> loadProducts() async {
-    final existing = state.status.data;
-    emit(ProductState.loading(data: existing));
+    final existing = state.getProductsStatus.data;
+    emit(state.copyWith(
+      getProductsStatus: BlocStatus.loading(data: existing),
+    ));
+
     try {
       final products = await getProducts();
       if (products.isEmpty) {
-        emit(ProductState.empty());
+        emit(state.copyWith(
+          getProductsStatus: const BlocStatus.empty(),
+        ));
       } else {
-        emit(ProductState.success(products));
+        emit(state.copyWith(
+          getProductsStatus: BlocStatus.success(data: products),
+        ));
       }
     } catch (e) {
-      emit(ProductState.failure(e.toString(), data: existing));
+      emit(state.copyWith(
+        getProductsStatus: BlocStatus.fail(error: e.toString(), data: existing),
+      ));
     }
   }
 
   void addNewProduct() {
-    final currentProducts = state.status.data ?? [];
-    // Note: In a real app, you would get context here to use localized strings
-    // For now, using static values as this is business logic layer
+    final currentProducts = state.getProductsStatus.data ?? [];
     final newProduct = Product(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: 'هذا النص هو مثال لنص',
@@ -46,16 +53,82 @@ class ProductCubit extends Cubit<ProductState> {
       imageUrls: [AppStrings.sampleImageUrl],
     );
     final updatedProducts = [newProduct, ...currentProducts];
-    emit(ProductState.success(updatedProducts));
+    emit(state.copyWith(
+      getProductsStatus: BlocStatus.success(data: updatedProducts),
+    ));
+  }
+
+  /// Add product from form with proper state management
+  /// Returns true if successful, false if failed
+  Future<bool> addProductFromForm({
+    required String name,
+    required String storeName,
+    required double price,
+    required String category,
+    String? imageUrl,
+  }) async {
+    // Emit loading state
+    emit(state.copyWith(
+      addProductStatus: const BlocStatus.loading(),
+    ));
+
+    try {
+      // Validate input
+      if (name.isEmpty || storeName.isEmpty || category.isEmpty || price <= 0) {
+        emit(state.copyWith(
+          addProductStatus: const BlocStatus.fail(
+            error: 'جميع الحقول مطلوبة والسعر يجب أن يكون أكبر من صفر',
+          ),
+        ));
+        return false;
+      }
+
+      final currentProducts = state.getProductsStatus.data ?? [];
+
+      // Create new product
+      final newProduct = Product(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        name: name,
+        storeName: storeName,
+        price: price,
+        category: category,
+        imageUrls: imageUrl != null ? [imageUrl] : [AppStrings.sampleImageUrl],
+      );
+
+      final updatedProducts = [newProduct, ...currentProducts];
+
+      // Emit success state
+      emit(state.copyWith(
+        getProductsStatus: BlocStatus.success(data: updatedProducts),
+        addProductStatus: BlocStatus.success(data: newProduct),
+      ));
+
+      return true;
+    } catch (e) {
+      // Emit failure state
+      emit(state.copyWith(
+        addProductStatus: BlocStatus.fail(error: e.toString()),
+      ));
+      return false;
+    }
+  }
+
+  /// Reset add product status to initial state
+  void resetAddProductStatus() {
+    emit(state.copyWith(
+      addProductStatus: const BlocStatus.initial(),
+    ));
   }
 
   Future<void> removeProduct(String productId) async {
-    final existing = state.status.data ?? [];
     try {
       await deleteProduct(productId);
       await loadProducts();
     } catch (e) {
-      emit(ProductState.failure(e.toString(), data: existing));
+      final existing = state.getProductsStatus.data ?? [];
+      emit(state.copyWith(
+        getProductsStatus: BlocStatus.fail(error: e.toString(), data: existing),
+      ));
     }
   }
 }

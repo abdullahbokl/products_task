@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/constants/app_dimensions.dart';
-import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/widgets/app_text.dart';
-import '../../../../../core/widgets/app_text_field.dart';
+import '../../../../../core/utils/form_validators.dart';
+import '../../../../../core/widgets/app_snackbar.dart';
 import '../../cubit/product_cubit.dart';
+import 'add_product_form_model.dart';
+import 'custom_text_form_field.dart';
+import 'image_picker_section.dart';
+import 'submit_button.dart';
 
 class AddProductForm extends StatefulWidget {
   const AddProductForm({super.key});
@@ -16,203 +19,131 @@ class AddProductForm extends StatefulWidget {
 }
 
 class _AddProductFormState extends State<AddProductForm> {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _priceController = TextEditingController();
-  final _storeNameController = TextEditingController();
-  final _categoryController = TextEditingController();
-  final _imageUrlController = TextEditingController();
+  late final AddProductFormModel _formModel;
+  String? _selectedImageUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _formModel = AddProductFormModel();
+  }
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _priceController.dispose();
-    _storeNameController.dispose();
-    _categoryController.dispose();
-    _imageUrlController.dispose();
+    _formModel.dispose();
     super.dispose();
   }
 
-  void _submitForm() {
-    if (_formKey.currentState?.validate() ?? false) {
-      // Add product logic here
-      context.read<ProductCubit>().addNewProduct();
-      Navigator.of(context).pop();
+  Future<void> _submitForm() async {
+    // Validate form
+    if (!_formModel.validate()) return;
 
-      // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: AppText(
-            AppStrings.productAddedSuccess(context),
-            style: const TextStyle(color: AppColors.white),
-          ),
-          backgroundColor: AppColors.successGreen,
-        ),
+    // Call Cubit with model's data (Cubit handles all logic)
+    final success = await context.read<ProductCubit>().addProductFromForm(
+          name: _formModel.name,
+          storeName: _formModel.storeName,
+          price: _formModel.price,
+          category: _formModel.category,
+          imageUrl: _selectedImageUrl,
+        );
+
+    // Handle UI based on result
+    if (!mounted) return;
+
+    if (success) {
+      Navigator.of(context).pop();
+      AppSnackBar.showSuccess(
+        context,
+        AppStrings.productAddedSuccess(context),
+      );
+    } else {
+      final error = context.read<ProductCubit>().state.addProductStatus.error;
+      AppSnackBar.showError(
+        context,
+        error ?? 'حدث خطأ أثناء إضافة المنتج',
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppDimensions.paddingXLarge),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Product Image Section
-            _buildImageSection(),
-            const SizedBox(height: AppDimensions.spacingXLarge),
-
-            // Product Name Field
-            _buildTextField(
-              controller: _nameController,
-              label: AppStrings.productNameLabel(context),
-              hint: AppStrings.productNameHint(context),
-              validator: (value) {
-                if (value?.isEmpty ?? true) {
-                  return AppStrings.fieldRequired(context);
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: AppDimensions.spacingLarge),
-
-            // Store Name Field
-            _buildTextField(
-              controller: _storeNameController,
-              label: AppStrings.storeNameLabel(context),
-              hint: AppStrings.storeNameHint(context),
-              validator: (value) {
-                if (value?.isEmpty ?? true) {
-                  return AppStrings.fieldRequired(context);
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: AppDimensions.spacingLarge),
-
-            // Price Field
-            _buildTextField(
-              controller: _priceController,
-              label: AppStrings.priceLabel(context),
-              hint: AppStrings.priceHint(context),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value?.isEmpty ?? true) {
-                  return AppStrings.fieldRequired(context);
-                }
-                if (double.tryParse(value!) == null) {
-                  return AppStrings.invalidPrice(context);
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: AppDimensions.spacingLarge),
-
-            // Category Field
-            _buildTextField(
-              controller: _categoryController,
-              label: AppStrings.categoryLabel(context),
-              hint: AppStrings.categoryHint(context),
-              validator: (value) {
-                if (value?.isEmpty ?? true) {
-                  return AppStrings.fieldRequired(context);
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: AppDimensions.spacingXLarge),
-
-            // Submit Button
-            _buildSubmitButton(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildImageSection() {
-    return Container(
-      height: 200,
-      decoration: BoxDecoration(
-        color: AppColors.lightGray,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
-        border: Border.all(
-          color: AppColors.borderGray,
-          width: AppDimensions.cardBorderWidth,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.add_photo_alternate_outlined,
-            size: 64,
-            color: AppColors.mediumGray,
-          ),
-          const SizedBox(height: AppDimensions.spacingMedium),
-          AppText(
-            AppStrings.addProductImage(context),
-            style: AppTextStyles.bodyMedium.copyWith(
-              color: AppColors.mediumGray,
+    return BlocBuilder<ProductCubit, ProductState>(
+      buildWhen: (previous, current) =>
+          previous.addProductStatus != current.addProductStatus,
+      builder: (context, state) {
+        return SingleChildScrollView(
+          padding: const EdgeInsets.all(AppDimensions.paddingXLarge),
+          child: Form(
+            key: _formModel.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ImagePickerSection(
+                  imageUrl: _selectedImageUrl,
+                  onTap: () => setState(
+                    () => _selectedImageUrl = 'https://via.placeholder.com/400',
+                  ),
+                ),
+                const SizedBox(height: AppDimensions.spacingXLarge),
+                CustomTextFormField(
+                  controller: _formModel.nameController,
+                  label: AppStrings.productNameLabel(context),
+                  hint: AppStrings.productNameHint(context),
+                  validator: FormValidators.required(
+                    context,
+                    message: AppStrings.fieldRequired(context),
+                  ),
+                ),
+                const SizedBox(height: AppDimensions.spacingLarge),
+                CustomTextFormField(
+                  controller: _formModel.storeNameController,
+                  label: AppStrings.storeNameLabel(context),
+                  hint: AppStrings.storeNameHint(context),
+                  validator: FormValidators.required(
+                    context,
+                    message: AppStrings.fieldRequired(context),
+                  ),
+                ),
+                const SizedBox(height: AppDimensions.spacingLarge),
+                CustomTextFormField(
+                  controller: _formModel.priceController,
+                  label: AppStrings.priceLabel(context),
+                  hint: AppStrings.priceHint(context),
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  validator: FormValidators.price(
+                    context,
+                    requiredMessage: AppStrings.fieldRequired(context),
+                    message: AppStrings.invalidPrice(context),
+                  ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r'^\d*\.?\d{0,2}'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppDimensions.spacingLarge),
+                CustomTextFormField(
+                  controller: _formModel.categoryController,
+                  label: AppStrings.categoryLabel(context),
+                  hint: AppStrings.categoryHint(context),
+                  validator: FormValidators.required(
+                    context,
+                    message: AppStrings.fieldRequired(context),
+                  ),
+                ),
+                const SizedBox(height: AppDimensions.spacingXLarge),
+                SubmitButton(
+                  onPressed: _submitForm,
+                  text: AppStrings.addProductButton(context),
+                  isLoading: state.addProductStatus.isLoading(),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    TextInputType? keyboardType,
-    String? Function(String?)? validator,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppText(
-          label,
-          style: AppTextStyles.bodyMedium.copyWith(
-            fontWeight: FontWeight.w600,
-            color: AppColors.darkGray,
-          ),
-        ),
-        const SizedBox(height: AppDimensions.spacingSmall),
-        AppTextField(
-          controller: controller,
-          hintText: hint,
-          keyboardType: keyboardType,
-          validator: validator,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSubmitButton() {
-    return ElevatedButton(
-      onPressed: _submitForm,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primaryGreen,
-        foregroundColor: AppColors.white,
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingLarge,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
-        ),
-        elevation: 0,
-      ),
-      child: AppText(
-        AppStrings.addProductButton(context),
-        style: AppTextStyles.bodyLarge.copyWith(
-          fontWeight: FontWeight.bold,
-          color: AppColors.white,
-        ),
-      ),
+        );
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../utils/colors.dart';
 
 class AppTextField extends StatelessWidget {
@@ -11,6 +12,7 @@ class AppTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool obscureText;
   final void Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppTextField({
     super.key,
@@ -23,6 +25,7 @@ class AppTextField extends StatelessWidget {
     this.suffixIcon,
     this.obscureText = false,
     this.onChanged,
+    this.inputFormatters,
   });
 
   @override
@@ -34,6 +37,7 @@ class AppTextField extends StatelessWidget {
       maxLines: maxLines,
       obscureText: obscureText,
       onChanged: onChanged,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon,

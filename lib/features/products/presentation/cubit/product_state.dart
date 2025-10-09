@@ -1,22 +1,27 @@
 part of 'product_cubit.dart';
 
 class ProductState extends Equatable {
-  final BlocStatus<List<Product>> status;
+  final BlocStatus<List<Product>> getProductsStatus;
+  final BlocStatus<Product?> addProductStatus;
 
-  const ProductState({required this.status});
+  const ProductState({
+    this.getProductsStatus = const BlocStatus.initial(),
+    this.addProductStatus = const BlocStatus.initial(),
+  });
 
-  const ProductState._(this.status);
-
-  factory ProductState.initial() => const ProductState(status: BlocStatus.initial());
-
-  factory ProductState.loading({List<Product>? data}) => ProductState(status: BlocStatus.loading(data: data));
-
-  factory ProductState.success(List<Product> products) => ProductState(status: BlocStatus.success(data: products));
-
-  factory ProductState.empty() => const ProductState(status: BlocStatus.empty());
-
-  factory ProductState.failure(String error, {List<Product>? data}) => ProductState(status: BlocStatus.fail(error: error, data: data));
+  ProductState copyWith({
+    BlocStatus<List<Product>>? getProductsStatus,
+    BlocStatus<Product?>? addProductStatus,
+  }) {
+    return ProductState(
+      getProductsStatus: getProductsStatus ?? this.getProductsStatus,
+      addProductStatus: addProductStatus ?? this.addProductStatus,
+    );
+  }
 
   @override
-  List<Object?> get props => [status];
+  List<Object> get props => [
+        getProductsStatus,
+        addProductStatus,
+      ];
 }
