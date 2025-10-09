@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../core/utils/colors.dart';
-import '../../core/utils/app_strings.dart';
-import '../../core/widgets/app_text.dart';
+import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/widgets/app_text.dart';
 import 'empty_state_message.dart';
 
 class EmptyProductsWidget extends StatelessWidget {

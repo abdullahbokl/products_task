@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../core/utils/colors.dart';
-import '../../core/utils/text_styles.dart';
-import '../../core/widgets/app_text.dart';
+import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/text_styles.dart';
+import '../../../../core/widgets/app_text.dart';
 
 class EmptyStateMessage extends StatelessWidget {
   final IconData icon;

@@ -4,7 +4,7 @@ import 'core/services/service_locator/service_locator.dart'
     show configureDependencies;
 import 'core/utils/themes.dart';
 import 'core/localization/app_localization_delegate.dart';
-import 'presentation/pages/product_list_screen.dart';
+import 'features/products/presentation/pages/product_list_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

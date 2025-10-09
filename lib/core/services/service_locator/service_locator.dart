@@ -5,12 +5,12 @@ import 'package:injectable/injectable.dart';
 import 'package:products_task/core/services/service_locator/service_locator.config.dart' show $initGetIt;
 
 // use package imports for project files
-import 'package:products_task/data/datasources/local_product_datasource.dart';
-import 'package:products_task/data/repositories/product_repository_impl.dart';
-import 'package:products_task/domain/repositories/product_repository.dart';
-import 'package:products_task/domain/usecases/get_products.dart';
-import 'package:products_task/domain/usecases/delete_product.dart';
-import 'package:products_task/presentation/cubit/product_cubit.dart';
+import 'package:products_task/features/products/data/datasources/local_product_datasource.dart';
+import 'package:products_task/features/products/data/repositories/product_repository_impl.dart';
+import 'package:products_task/features/products/domain/repositories/product_repository.dart';
+import 'package:products_task/features/products/domain/usecases/get_products.dart';
+import 'package:products_task/features/products/domain/usecases/delete_product.dart';
+import 'package:products_task/features/products/presentation/cubit/product_cubit.dart';
 
 final GetIt getIt = GetIt.I;
 

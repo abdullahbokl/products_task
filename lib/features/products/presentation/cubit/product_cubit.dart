@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../core/helpers/bloc_status.dart';
-import '../../core/utils/app_strings.dart';
+import '../../../../core/helpers/bloc_status.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/usecases/get_products.dart';
 import '../../domain/usecases/delete_product.dart';
 import '../widgets/category_container.dart';
-import '../../core/utils/colors.dart';
+import '../../../../core/utils/colors.dart';
 
 part 'product_state.dart';
 
