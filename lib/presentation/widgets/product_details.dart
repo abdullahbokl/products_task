@@ -11,48 +11,52 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 12,
-      children: [
-        const AppText(
-          AppStrings.productPlaceholderText,
-          style: AppTextStyles.heading3,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.right,
-        ),
-        RichText(
-          textAlign: TextAlign.right,
-          text: TextSpan(
-            style: DefaultTextStyle.of(context).style,
-            children: [
-              TextSpan(
-                text: '${price.toStringAsFixed(0)} ',
-                style: AppTextStyles.price,
-              ),
-              TextSpan(
-                text: AppStrings.currencyDollar,
-                style: AppTextStyles.bodySmall.copyWith(
-                  color: AppColors.darkGray,
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppText(
+            AppStrings.productPlaceholderText(context),
+            style: AppTextStyles.heading3,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.right,
+          ),
+          const SizedBox(height: 12),
+          RichText(
+            textAlign: TextAlign.right,
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: [
+                TextSpan(
+                  text: '${price.toStringAsFixed(0)} ',
+                  style: AppTextStyles.price,
                 ),
-              ),
-            ],
+                TextSpan(
+                  text: '${AppStrings.currencyDollar(context)}',
+                  style: AppTextStyles.bodySmall.copyWith(
+                    color: AppColors.darkGray,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          decoration: BoxDecoration(
-            color: AppColors.lightGray,
-            borderRadius: BorderRadius.circular(6),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: AppText(
+              AppStrings.storeName(context),
+              style: AppTextStyles.caption,
+            ),
           ),
-          child: const AppText(
-            AppStrings.storeName,
-            style: AppTextStyles.caption,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -17,10 +17,10 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(width: 48), // Balance the layout
-          const AppText(
-            AppStrings.appBarProducts,
-            style: TextStyle(
+          const SizedBox(width: 48),
+          AppText(
+            AppStrings.appBarProducts(context),
+            style: const TextStyle(
               fontFamily: 'Montserrat',
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -33,7 +33,10 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
             decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.borderGray, width: 1),
+              border: Border.all(
+                color: AppColors.borderGray,
+                width: 1,
+              ),
             ),
             child: IconButton(
               onPressed: () {
@@ -51,3 +54,4 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
+

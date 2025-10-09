@@ -9,7 +9,7 @@ class ViewAllCategoriesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CategoryContainer(
-      title: AppStrings.viewAllCategories,
+      title: AppStrings.viewAllCategories(context),
       isViewAll: true,
       child: Container(
         color: AppColors.primaryGreen,
@@ -25,4 +25,3 @@ class ViewAllCategoriesButton extends StatelessWidget {
     );
   }
 }
-

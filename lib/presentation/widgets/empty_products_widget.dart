@@ -15,18 +15,16 @@ class EmptyProductsWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const EmptyStateMessage(
+            EmptyStateMessage(
               icon: Icons.inventory_2_outlined,
-              title: AppStrings.emptyProductsTitle,
-              subtitle: AppStrings.emptyProductsSubtitle,
+              title: AppStrings.emptyProductsTitle(context),
+              subtitle: AppStrings.emptyProductsSubtitle(context),
             ),
             const SizedBox(height: 32),
             ElevatedButton.icon(
-              onPressed: () {
-                // AppStrings.commentAddProductFunctionality
-              },
+              onPressed: () {},
               icon: const Icon(Icons.add),
-              label: const AppText(AppStrings.addProductButton),
+              label: AppText(AppStrings.addProductButton(context)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primaryGreen,
                 foregroundColor: AppColors.white,

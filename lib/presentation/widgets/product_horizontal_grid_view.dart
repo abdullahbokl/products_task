@@ -5,10 +5,7 @@ import 'product_card_compact.dart';
 class ProductHorizontalGridView extends StatelessWidget {
   final List<Product> products;
 
-  const ProductHorizontalGridView({
-    super.key,
-    required this.products,
-  });
+  const ProductHorizontalGridView({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -28,4 +25,3 @@ class ProductHorizontalGridView extends StatelessWidget {
     );
   }
 }
-

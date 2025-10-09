@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
-import '../utils/text_styles.dart';
-import '../utils/app_strings.dart';
-import 'app_text.dart';
+import '../../core/utils/colors.dart';
+import '../../core/utils/text_styles.dart';
+import '../../core/utils/app_strings.dart';
+import '../../core/widgets/app_text.dart';
 
 class AppErrorWidget extends StatelessWidget {
   final String message;
@@ -28,8 +28,8 @@ class AppErrorWidget extends StatelessWidget {
               color: AppColors.accentRed,
             ),
             const SizedBox(height: 16),
-            const AppText(
-              AppStrings.errorTitle,
+            AppText(
+              AppStrings.errorTitle(context),
               style: AppTextStyles.heading2,
             ),
             const SizedBox(height: 8),
@@ -42,7 +42,7 @@ class AppErrorWidget extends StatelessWidget {
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: onRetry,
-                child: const AppText(AppStrings.tryAgainButton),
+                child: AppText(AppStrings.tryAgainButton(context)),
               ),
             ],
           ],

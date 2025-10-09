@@ -13,10 +13,10 @@ class CategoriesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: AppText(
-            AppStrings.categoriesTitle,
+            AppStrings.categoriesTitle(context),
             style: AppTextStyles.heading3,
           ),
         ),
@@ -25,21 +25,21 @@ class CategoriesSection extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            children: const [
+            children: [
               ViewAllCategoriesButton(),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               CategoryCard(
-                title: AppStrings.category1,
+                title: AppStrings.category1(context),
                 imageUrl: AppStrings.categoryImage1,
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               CategoryCard(
-                title: AppStrings.category2,
+                title: AppStrings.category2(context),
                 imageUrl: AppStrings.categoryImage2,
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               CategoryCard(
-                title: AppStrings.category3,
+                title: AppStrings.category3(context),
                 imageUrl: AppStrings.categoryImage3,
               ),
             ],
@@ -49,4 +49,3 @@ class CategoriesSection extends StatelessWidget {
     );
   }
 }
-

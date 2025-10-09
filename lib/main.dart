@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/services/service_locator/service_locator.dart'
     show configureDependencies;
 import 'core/utils/themes.dart';
+import 'core/localization/app_localization_delegate.dart';
 import 'presentation/pages/product_list_screen.dart';
 
 Future<void> main() async {
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
       locale: const Locale('ar', 'SA'),
       supportedLocales: const [Locale('ar', 'SA'), Locale('en', 'US')],
       localizationsDelegates: const [
+        AppLocalizationDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -35,3 +37,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

@@ -38,7 +38,7 @@ class _ProductListBodyState extends State<ProductListBody> {
             );
           },
           failure: (error, data) => AppErrorWidget(
-            message: error ?? AppStrings.errorFallback,
+            message: error ?? AppStrings.errorFallback(context),
             onRetry: () => context.read<ProductCubit>().loadProducts(),
           ),
           loading: () => const AppLoader(),

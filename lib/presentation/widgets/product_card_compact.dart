@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/product.dart';
-import 'product_image.dart';
 import '../../core/utils/colors.dart';
-import '../../core/utils/text_styles.dart';
 import '../../core/utils/app_strings.dart';
 import '../../core/widgets/app_text.dart';
+import 'product_image.dart';
 
 class ProductCardCompact extends StatelessWidget {
-  final Product product;
+  final dynamic product;
   final VoidCallback? onDelete;
 
   const ProductCardCompact({super.key, required this.product, this.onDelete});
@@ -30,15 +28,14 @@ class ProductCardCompact extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.all(8),
               child: Column(
-                spacing: 6,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AppText(
-                    AppStrings.productPlaceholderText,
-                    style: TextStyle(
+                  AppText(
+                    AppStrings.productPlaceholderText(context),
+                    style: const TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -48,8 +45,9 @@ class ProductCardCompact extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.right,
                   ),
+                  const SizedBox(height: 6),
                   AppText(
-                    '${AppStrings.currencyDollar} ${product.price.toStringAsFixed(0)}',
+                    '${AppStrings.currencyDollar(context)} ${product.price.toStringAsFixed(0)}',
                     style: const TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 12,
@@ -58,6 +56,7 @@ class ProductCardCompact extends StatelessWidget {
                     ),
                     textAlign: TextAlign.right,
                   ),
+                  const SizedBox(height: 6),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,
@@ -67,9 +66,9 @@ class ProductCardCompact extends StatelessWidget {
                       color: AppColors.lightGray,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: const AppText(
-                      AppStrings.storeName,
-                      style: TextStyle(
+                    child: AppText(
+                      AppStrings.storeName(context),
+                      style: const TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
@@ -86,3 +85,4 @@ class ProductCardCompact extends StatelessWidget {
     );
   }
 }
+
