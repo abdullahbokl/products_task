@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../core/utils/colors.dart';
 import '../../core/utils/text_styles.dart';
 import '../../core/utils/app_strings.dart';
 import '../../core/widgets/app_text.dart';
@@ -19,44 +18,21 @@ class DisplayToggleSection extends StatelessWidget {
     return GestureDetector(
       onTap: onToggle,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         child: Row(
+          spacing: 8,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            Image.asset(
+              'assets/icons/horizontal_vertical_icon.png',
+              width: 24,
+              height: 24,
+            ),
             AppText(
               isHorizontal
                   ? AppStrings.toggleToVertical
                   : AppStrings.toggleToHorizontal,
               style: AppTextStyles.accent,
-            ),
-            const SizedBox(width: 8),
-            Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: AppColors.lightGray,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 8,
-                    height: isHorizontal ? 8 : 12,
-                    decoration: BoxDecoration(
-                      color: AppColors.accentRed,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  const SizedBox(width: 2),
-                  Container(
-                    width: 8,
-                    height: isHorizontal ? 12 : 8,
-                    decoration: BoxDecoration(
-                      color: AppColors.accentRed,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ],
-              ),
             ),
           ],
         ),
