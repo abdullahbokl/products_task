@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/colors.dart';
+import '../../../../../core/common/widgets/app_loader.dart';
 
 class ProductImage extends StatelessWidget {
   final List<String> imageUrls;
@@ -35,6 +36,12 @@ class ProductImage extends StatelessWidget {
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return const Center(
+                child: AppLoader(),
+              );
+            },
             errorBuilder: (context, error, stackTrace) {
               return const Center(
                 child: Icon(

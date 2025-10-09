@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/colors.dart';
+import '../../../../../core/common/widgets/app_loader.dart';
 import 'category_container.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -27,6 +28,12 @@ class CategoryCard extends StatelessWidget {
           imageUrl,
           fit: BoxFit.cover,
           width: double.infinity,
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
+            return const Center(
+              child: AppLoader(size: 25),
+            );
+          },
           errorBuilder: (context, error, stackTrace) {
             return Container(
               color: AppColors.lightGray,

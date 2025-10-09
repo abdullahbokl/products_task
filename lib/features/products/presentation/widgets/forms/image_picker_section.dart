@@ -4,6 +4,7 @@ import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/common/widgets/app_text.dart';
+import '../../../../../core/common/widgets/app_loader.dart';
 
 class ImagePickerSection extends StatelessWidget {
   final VoidCallback? onTap;
@@ -35,6 +36,12 @@ class ImagePickerSection extends StatelessWidget {
                 child: Image.network(
                   imageUrl!,
                   fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(
+                      child: AppLoader(),
+                    );
+                  },
                   errorBuilder: (context, error, stackTrace) {
                     return _buildPlaceholder(context);
                   },
@@ -65,4 +72,3 @@ class ImagePickerSection extends StatelessWidget {
     );
   }
 }
-

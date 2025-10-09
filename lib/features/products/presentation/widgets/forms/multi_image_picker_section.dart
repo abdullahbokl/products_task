@@ -5,6 +5,7 @@ import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/common/widgets/app_text.dart';
+import '../../../../../core/common/widgets/app_loader.dart';
 
 class MultiImagePickerSection extends StatelessWidget {
   final List<String> imagePaths;
@@ -78,6 +79,12 @@ class MultiImagePickerSection extends StatelessWidget {
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const Center(
+                        child: AppLoader(size: 25),
+                      );
+                    },
                   )
                 : Image.file(
                     File(imagePath),
