@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_dimensions.dart';
-import '../../domain/entities/product.dart';
+import '../../../../../core/constants/app_dimensions.dart';
+import '../../../domain/entities/product.dart';
 import 'product_card_compact.dart';
 
 class ProductHorizontalGridView extends StatelessWidget {

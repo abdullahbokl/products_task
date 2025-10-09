@@ -6,7 +6,7 @@ import '../../../../core/utils/app_strings.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/usecases/get_products.dart';
 import '../../domain/usecases/delete_product.dart';
-import '../widgets/category_container.dart';
+import '../widgets/categories/category_container.dart';
 import '../../../../core/utils/colors.dart';
 
 part 'product_state.dart';

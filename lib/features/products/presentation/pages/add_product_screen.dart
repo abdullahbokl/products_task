@@ -4,10 +4,10 @@ import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/custom_icon_button.dart';
-import '../widgets/add_product_form.dart';
+import '../widgets/forms/add_product_form.dart';
 
-class AddProductPage extends StatelessWidget {
-  const AddProductPage({super.key});
+class AddProductScreen extends StatelessWidget {
+  const AddProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

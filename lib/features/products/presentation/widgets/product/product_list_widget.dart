@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_dimensions.dart';
-import '../../domain/entities/product.dart';
+import '../../../../../core/constants/app_dimensions.dart';
+import '../../../domain/entities/product.dart';
 import 'product_card.dart';
 import 'product_horizontal_grid_view.dart';
 

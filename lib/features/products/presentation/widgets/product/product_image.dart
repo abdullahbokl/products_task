@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/colors.dart';
+import '../../../../../core/utils/colors.dart';
 
 class ProductImage extends StatelessWidget {
   final List<String> imageUrls;

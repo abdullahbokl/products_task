@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_dimensions.dart';
-import '../../../../core/utils/text_styles.dart';
-import '../../../../core/utils/app_strings.dart';
-import '../../../../core/widgets/app_text.dart';
+import '../../../../../core/constants/app_dimensions.dart';
+import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/widgets/app_text.dart';
 
 class DisplayToggleSection extends StatelessWidget {
   final bool isHorizontal;

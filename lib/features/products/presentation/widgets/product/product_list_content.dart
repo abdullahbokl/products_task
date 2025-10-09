@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/product.dart';
-import 'categories_section.dart';
+import '../../../domain/entities/product.dart';
+import '../categories/categories_section.dart';
 import 'display_toggle_section.dart';
 import 'product_list_widget.dart';
 

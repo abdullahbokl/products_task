@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/constants/app_dimensions.dart';
-import '../../../../core/utils/colors.dart';
-import '../../../../core/utils/app_strings.dart';
-import '../../../../core/widgets/app_text.dart';
-import '../../../../core/widgets/custom_icon_button.dart';
-import '../cubit/product_cubit.dart';
-import '../pages/add_product_page.dart';
+import '../../../../../core/constants/app_dimensions.dart';
+import '../../../../../core/utils/colors.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/widgets/app_text.dart';
+import '../../../../../core/widgets/custom_icon_button.dart';
+import '../../cubit/product_cubit.dart';
+import '../../pages/add_product_screen.dart';
 
 class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ProductListAppBar({super.key});
@@ -34,7 +34,7 @@ class ProductListAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const AddProductPage(),
+                  builder: (context) => const AddProductScreen(),
                 ),
               );
             },

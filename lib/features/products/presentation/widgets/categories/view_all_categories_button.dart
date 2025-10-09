@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_dimensions.dart';
-import '../../../../core/utils/colors.dart';
-import '../../../../core/utils/app_strings.dart';
+import '../../../../../core/constants/app_dimensions.dart';
+import '../../../../../core/utils/colors.dart';
+import '../../../../../core/utils/app_strings.dart';
 import 'category_container.dart';
 
 class ViewAllCategoriesButton extends StatelessWidget {
