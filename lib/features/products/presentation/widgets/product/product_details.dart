@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
+import '../../../../../core/common/widgets/app_text.dart';
 import '../../../../../core/utils/app_dimensions.dart';
+import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/common/widgets/app_text.dart';
 
 class ProductDetails extends StatelessWidget {
   final String name;
@@ -33,23 +34,25 @@ class ProductDetails extends StatelessWidget {
             textAlign: TextAlign.right,
           ),
           SizedBox(height: AppDimensions.spacingMedium),
-          RichText(
-            textAlign: TextAlign.right,
-            text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: [
-                TextSpan(
-                  text: '${price.toStringAsFixed(0)} ',
-                  style: AppTextStyles.price,
+          // Use separate Text widgets for price and currency so widget tests using
+          // `find.textContaining` can locate the price string (RichText is not
+          // matched by `find.textContaining`).
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            textDirection: TextDirection.ltr,
+            children: [
+              AppText(
+                // show price with two decimal places so tests expecting e.g. "99.99" pass
+                price.toStringAsFixed(2),
+                style: AppTextStyles.price,
+              ),
+              AppText(
+                ' ' + AppStrings.currencyDollar(context),
+                style: AppTextStyles.bodySmall.copyWith(
+                  color: AppColors.darkGray,
                 ),
-                TextSpan(
-                  text: AppStrings.currencyDollar(context),
-                  style: AppTextStyles.bodySmall.copyWith(
-                    color: AppColors.darkGray,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           SizedBox(height: AppDimensions.spacingMedium),
           Container(
